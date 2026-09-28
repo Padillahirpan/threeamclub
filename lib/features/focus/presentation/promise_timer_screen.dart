@@ -13,6 +13,7 @@ import '../../../core/l10n/app_localizations.dart';
 import '../../../core/widgets/category_visual.dart';
 import '../../../core/widgets/timer_wave.dart';
 import '../../plan/application/phase_providers.dart';
+import '../../settings/data/settings_repository.dart';
 import '../data/timer_repository.dart';
 
 /// Promise timer — step 7 (PRD FR-7.x, DESIGN.md §7.7).
@@ -136,9 +137,11 @@ class _PromiseTimerScreenState extends ConsumerState<PromiseTimerScreen> {
     final progress =
         1 - remaining / (session.plannedSec == 0 ? 1 : session.plannedSec);
 
-    // Keep the screen on while the timer runs (optional setting, M4 adds
-    // the toggle; default on per ARCHITECTURE.md §3).
-    if (session.isRunning) {
+    // Keep the screen on while the timer runs (settings toggle, default
+    // on per ARCHITECTURE.md §3).
+    final wakelockEnabled =
+        ref.watch(wakelockEnabledProvider).value ?? true;
+    if (session.isRunning && wakelockEnabled) {
       WakelockPlus.enable();
     } else {
       WakelockPlus.disable();

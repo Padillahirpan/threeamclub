@@ -28,12 +28,17 @@ class PhaseMorningState {
     this.alarmFiredAt,
     this.wakeConfirmedAt,
     this.allPromisesKept = false,
+    this.isRest = false,
   });
 
   final DateTime scheduledAt;
   final DateTime? alarmFiredAt;
   final DateTime? wakeConfirmedAt;
   final bool allPromisesKept;
+
+  /// A rest day (PRD FR-9.1): the alarm is cancelled, so the wake window
+  /// is a quiet dashboard day — never `ringing`.
+  final bool isRest;
 
   DateTime get closesAt => DateTime(
         scheduledAt.year,
@@ -68,6 +73,9 @@ DayPhase resolveDayPhase({
     if (morning.wakeConfirmedAt != null) {
       return morning.allPromisesKept ? DayPhase.done : DayPhase.focus;
     }
+    // A rest morning is already "closed" — its wake window is a normal
+    // dashboard day (FR-9.1: no alarm, no ringing).
+    if (morning.isRest) return DayPhase.done;
     // The alarm time has been reached (covers the cold-start case where
     // alarmFiredAt has not been backfilled yet) — late wake still allowed
     // until 06:00 (PRD §7 "Late wake").

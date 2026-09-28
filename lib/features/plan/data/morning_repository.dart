@@ -231,6 +231,24 @@ class MorningRepository {
     return row?.bedtimeLeadMinutes ?? 30;
   }
 
+  /// Re-schedules the bedtime reminder for the upcoming pending morning
+  /// (called after the lead setting changes).
+  Future<void> refreshBedtimeReminder() async {
+    final plan = await activePlan();
+    if (plan == null) return;
+    final relevant = await relevantMorning();
+    if (relevant == null ||
+        relevant.result != 'pending' ||
+        !relevant.scheduledAt.isAfter(_clock.now())) {
+      return;
+    }
+    await _scheduleBedtimeReminder(
+      plan: plan,
+      wakeAt: relevant.scheduledAt,
+      body: plan.whyText,
+    );
+  }
+
   // ---- Writes --------------------------------------------------------------
 
   /// FR-5.4: record wake confirmed with timestamp.
@@ -344,11 +362,27 @@ class MorningRepository {
   Future<void> rollover(db.PlanRow plan) async {
     final wakeAt =
         t.nextOccurrence(now: _clock.now(), minuteOfDay: plan.wakeMinute);
-    final key = t.dateKey(wakeAt);
+    await armMorningAt(wakeAt, plan);
+  }
 
-    final existing = await (_db.select(_db.mornings)
-          ..where((m) => m.date.equals(key)))
-        .getSingleOrNull();
+  /// Creates (or re-arms) the morning for [wakeAt], skipping any date that
+  /// is already a rest day (FR-9.1: the chain continues past a rest day).
+  Future<void> armMorningAt(DateTime wakeAt, db.PlanRow plan) async {
+    var candidate = wakeAt;
+    db.MorningRow? existing;
+    // Step past rest mornings — they never get an alarm.
+    while (true) {
+      final row = await (_db.select(_db.mornings)
+            ..where((m) => m.date.equals(t.dateKey(candidate)))
+            ..limit(1))
+          .getSingleOrNull();
+      if (row == null || row.result != 'rest') {
+        existing = row;
+        break;
+      }
+      candidate = candidate.add(const Duration(days: 1));
+    }
+
     if (existing != null) {
       await _ensureScheduled(existing, plan);
       return;
@@ -365,9 +399,9 @@ class MorningRepository {
       await _db.into(_db.mornings).insert(
             db.MorningsCompanion.insert(
               id: morningId,
-              date: key,
+              date: t.dateKey(candidate),
               planId: plan.id,
-              scheduledAt: wakeAt.toUtc(),
+              scheduledAt: candidate.toUtc(),
               createdAt: now,
               updatedAt: now,
             ),
@@ -388,20 +422,75 @@ class MorningRepository {
 
     await _alarm.schedule(AlarmSpec(
       alarmId: 'wake-$morningId',
-      triggerAtMillis: wakeAt.millisecondsSinceEpoch,
+      triggerAtMillis: candidate.millisecondsSinceEpoch,
       title: '3AM Club',
       body: plan.whyText ?? '',
     ));
 
     await _scheduleBedtimeReminder(
       plan: plan,
-      wakeAt: wakeAt,
+      wakeAt: candidate,
       body: plan.whyText,
     );
   }
 
+  /// FR-9.1: marks an upcoming morning as a rest day — cancels its alarm
+  /// and reminder, records `result = 'rest'` (streak-neutral), and arms
+  /// the following morning so the chain never breaks.
+  ///
+  /// Returns false when not allowed (already fired/confirmed, or the
+  /// rolling-7-day rest limit is used up).
+  Future<bool> markRestDay(String morningId) async {
+    final row = await (_db.select(_db.mornings)
+          ..where((m) => m.id.equals(morningId)))
+        .getSingleOrNull();
+    if (row == null ||
+        row.result != 'pending' ||
+        row.alarmFiredAt != null ||
+        row.wakeConfirmedAt != null ||
+        !row.scheduledAt.toLocal().isAfter(_clock.now())) {
+      return false; // only an upcoming, un-fired morning can rest
+    }
+    if (!await canMarkRestDay()) return false;
+
+    final now = _clock.now().toUtc();
+    await (_db.update(_db.mornings)..where((m) => m.id.equals(morningId)))
+        .write(db.MorningsCompanion(
+      result: const Value('rest'),
+      updatedAt: Value(now),
+    ));
+
+    await _alarm.cancel('wake-$morningId');
+    await _notifications.cancelBedtimeReminder();
+
+    // Arm the day after the rest date (skipping further rest dates).
+    final plan = await activePlan();
+    if (plan != null) {
+      final restAt = row.scheduledAt.toLocal();
+      final next = DateTime(restAt.year, restAt.month, restAt.day,
+              plan.wakeMinute ~/ 60, plan.wakeMinute % 60)
+          .add(const Duration(days: 1));
+      await armMorningAt(next, plan);
+    }
+    return true;
+  }
+
+  /// FR-9.1 limit: at most 1 rest day per rolling 7 days — no other rest
+  /// morning may exist within the last 6 days (today included).
+  Future<bool> canMarkRestDay() async {
+    final cutoff =
+        t.dateKey(_clock.now().subtract(const Duration(days: 6)));
+    final used = await (_db.select(_db.mornings)
+          ..where((m) =>
+              m.result.equals('rest') &
+              m.date.isBiggerOrEqualValue(cutoff)))
+        .get();
+    return used.isEmpty;
+  }
+
   Future<void> _ensureScheduled(db.MorningRow morning, db.PlanRow plan) async {
-    if (!morning.scheduledAt.toLocal().isAfter(_clock.now()) ||
+    if (morning.result == 'rest' || // rest mornings never re-arm (FR-9.1)
+        !morning.scheduledAt.toLocal().isAfter(_clock.now()) ||
         morning.wakeConfirmedAt != null) {
       return;
     }

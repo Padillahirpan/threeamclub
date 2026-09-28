@@ -263,12 +263,6 @@ class AppLocalizationsId extends AppLocalizations {
   String get focusPlaceholderBody => 'Layar fokus hadir di build berikutnya.';
 
   @override
-  String get dashboardPlaceholderTitle => 'Kemajuanmu';
-
-  @override
-  String get dashboardPlaceholderBody => 'Dasbor hadir di build berikutnya.';
-
-  @override
   String get alarmSpikeTitle => 'Uji alarm (debug)';
 
   @override
@@ -365,4 +359,211 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get promiseKept => 'Ditepati. Itu berarti.';
+
+  @override
+  String get dashboardTitle => 'Kemajuanmu';
+
+  @override
+  String get dashEmptyTitle => 'Hari 1 dimulai malam ini.';
+
+  @override
+  String get dashEmptyBody =>
+      'Tanda tangani rencanamu malam ini — matahari pertama terbit besok.';
+
+  @override
+  String get dashHeroKept => 'Janji ditepati.';
+
+  @override
+  String dashCount(int kept, int total) {
+    return '$kept dari $total';
+  }
+
+  @override
+  String get dashHeroRest => 'Istirahat hari ini. Runtunan menunggumu.';
+
+  @override
+  String get dashHeroMissed => 'Pagi baru, awal baru.';
+
+  @override
+  String get dashFreshTomorrow => 'Awal baru besok.';
+
+  @override
+  String get dashFreshMonday => 'Awal baru hari Senin.';
+
+  @override
+  String get dashFreshFirst => 'Awal baru tanggal 1.';
+
+  @override
+  String dashForward(String time) {
+    return 'Besok matahari terbit pukul $time.';
+  }
+
+  @override
+  String get streakCurrentLabel => 'Runtunan sekarang';
+
+  @override
+  String get streakBestLabel => 'Runtunan terbaik';
+
+  @override
+  String streakDays(int days) {
+    return '$days hari';
+  }
+
+  @override
+  String get streakDayOne => '1 hari';
+
+  @override
+  String milestoneNextDays(int days, int milestone) {
+    return '$days hari lagi menuju matahari $milestone harimu';
+  }
+
+  @override
+  String milestoneNextDay(int milestone) {
+    return '1 hari lagi menuju matahari $milestone harimu';
+  }
+
+  @override
+  String journeyDayLabel(int day, int total) {
+    return 'Hari $day dari $total';
+  }
+
+  @override
+  String get journeyPhase1 => 'Patahkan pola lama';
+
+  @override
+  String get journeyPhase2 => 'Bangun yang baru';
+
+  @override
+  String get journeyPhase3 => 'Jadikan milikmu';
+
+  @override
+  String get weekTitle => '7 hari terakhir';
+
+  @override
+  String get winsTitle => 'Kemenangan';
+
+  @override
+  String get winsMinutesLabel => 'Waktu untuk yang penting';
+
+  @override
+  String winsMinutesHm(int hours, int minutes) {
+    return '${hours}j ${minutes}m';
+  }
+
+  @override
+  String winsMinutesM(int minutes) {
+    return '${minutes}m';
+  }
+
+  @override
+  String get winsEarliestLabel => 'Bangun paling pagi';
+
+  @override
+  String get winsMostKeptLabel => 'Paling sering ditepati';
+
+  @override
+  String get promiseRatesTitle => 'Janji · 30 hari terakhir';
+
+  @override
+  String rateCaption(int kept, int total) {
+    return '$kept dari $total';
+  }
+
+  @override
+  String get tonightTitle => 'Malam ini';
+
+  @override
+  String get tonightWake => 'Bangun';
+
+  @override
+  String get tonightBed => 'Tidur';
+
+  @override
+  String tonightPromises(int count) {
+    return '$count janji';
+  }
+
+  @override
+  String get restAction => 'Istirahat besok';
+
+  @override
+  String get restConfirmTitle => 'Istirahat besok?';
+
+  @override
+  String get restConfirmBody => 'Tanpa alarm besok. Runtunan menunggumu.';
+
+  @override
+  String get restUsed => 'Hari istirahat sudah dipakai minggu ini';
+
+  @override
+  String get restActive => 'Hari istirahat';
+
+  @override
+  String get weekDotKept => 'Ditepati';
+
+  @override
+  String get weekDotFull => 'Semua janji ditepati';
+
+  @override
+  String get weekDotRest => 'Hari istirahat';
+
+  @override
+  String get weekDotMissed => 'Hari tenang';
+
+  @override
+  String get weekDotUpcoming => 'Belum tiba';
+
+  @override
+  String get weekDotNone => 'Tidak ada rencana';
+
+  @override
+  String get settingsTitle => 'Pengaturan';
+
+  @override
+  String get settingsWakelock => 'Layar tetap menyala saat timer';
+
+  @override
+  String get settingsLead => 'Jeda pengingat waktu tidur';
+
+  @override
+  String minutesShort(int minutes) {
+    return '$minutes mnt';
+  }
+
+  @override
+  String get settingsBackup => 'Cadangkan & pulihkan';
+
+  @override
+  String get backupTitle => 'Cadangkan & pulihkan';
+
+  @override
+  String get backupBody =>
+      'Semua data hanya ada di ponsel ini. Ekspor file cadangan atau pulihkan darinya.';
+
+  @override
+  String get backupExport => 'Ekspor cadangan';
+
+  @override
+  String get backupExportDone => 'Cadangan siap dibagikan';
+
+  @override
+  String get backupImport => 'Pulihkan dari file';
+
+  @override
+  String get backupPreviewTitle => 'Pulihkan cadangan ini?';
+
+  @override
+  String backupPreviewCounts(int mornings, int promises, int plans) {
+    return '$mornings pagi · $promises janji · $plans rencana';
+  }
+
+  @override
+  String get backupReplaceNote =>
+      'Memulihkan akan mengganti semua data di ponsel ini.';
+
+  @override
+  String get backupRestoreDone => 'Dipulihkan';
+
+  @override
+  String get backupInvalidFile => 'File itu bukan cadangan yang valid';
 }

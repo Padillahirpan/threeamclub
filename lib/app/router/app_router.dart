@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/time/day_phase.dart';
 import '../../debug/alarm_spike_screen.dart';
+import '../../features/backup/presentation/backup_screen.dart';
 import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/focus/data/timer_repository.dart';
 import '../../features/focus/presentation/focus_screen.dart';
@@ -14,6 +15,7 @@ import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/plan/application/phase_providers.dart';
 import '../../features/plan/presentation/plan_screen.dart';
 import '../../features/promises/presentation/promise_builder_screen.dart';
+import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/sign/presentation/sign_screen.dart';
 import '../../features/wake/presentation/wake_screen.dart';
 import 'routes.dart';
@@ -107,6 +109,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.dashboard,
         builder: (context, state) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: Routes.settings,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: Routes.settingsBackup,
+        builder: (context, state) => const BackupScreen(),
       ),
       GoRoute(
         path: Routes.debugAlarmSpike,

@@ -114,8 +114,6 @@
   "wakePlaceholderBody": "The wake screen arrives in the next build.",
   "focusPlaceholderTitle": "One promise at a time.",
   "focusPlaceholderBody": "The focus screen arrives in the next build.",
-  "dashboardPlaceholderTitle": "Your progress",
-  "dashboardPlaceholderBody": "The dashboard arrives in the next build.",
   "alarmSpikeTitle": "Alarm spike (debug)",
   "notifBedtimeTitle": "3AM Club",
   "notifBedtimeBody": "Tonight, you keep your promise.",
@@ -161,5 +159,132 @@
   "timerEndEarlyTitle": "End this early?",
   "timerEndEarlyBody": "It's okay. Tomorrow is another chance.",
   "timerLine": "Just this. Nothing else.",
-  "promiseKept": "Kept. That counts."
+  "promiseKept": "Kept. That counts.",
+  "dashboardTitle": "Your progress",
+  "dashEmptyTitle": "Day 1 starts tonight.",
+  "dashEmptyBody": "Sign your plan this evening — the first sunrise is tomorrow.",
+  "dashHeroKept": "Promise kept.",
+  "dashCount": "{kept} of {total}",
+  "@dashCount": {
+    "placeholders": {
+      "kept": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dashHeroRest": "Rest today. The streak waits for you.",
+  "dashHeroMissed": "New morning, fresh start.",
+  "dashFreshTomorrow": "A fresh start tomorrow.",
+  "dashFreshMonday": "A fresh start on Monday.",
+  "dashFreshFirst": "A fresh start on the 1st.",
+  "dashForward": "Tomorrow the sun rises at {time}.",
+  "@dashForward": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "streakCurrentLabel": "Current streak",
+  "streakBestLabel": "Best streak",
+  "streakDays": "{days} days",
+  "@streakDays": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "streakDayOne": "1 day",
+  "milestoneNextDays": "{days} days to your {milestone}-day sun",
+  "@milestoneNextDays": {
+    "placeholders": {
+      "days": {"type": "int"},
+      "milestone": {"type": "int"}
+    }
+  },
+  "milestoneNextDay": "1 day to your {milestone}-day sun",
+  "@milestoneNextDay": {
+    "placeholders": {
+      "milestone": {"type": "int"}
+    }
+  },
+  "journeyDayLabel": "Day {day} of {total}",
+  "@journeyDayLabel": {
+    "placeholders": {
+      "day": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "journeyPhase1": "Break the old pattern",
+  "journeyPhase2": "Build the new one",
+  "journeyPhase3": "Make it yours",
+  "weekTitle": "Last 7 days",
+  "winsTitle": "Wins",
+  "winsMinutesLabel": "Time on what matters",
+  "winsMinutesHm": "{hours}h {minutes}m",
+  "@winsMinutesHm": {
+    "placeholders": {
+      "hours": {"type": "int"},
+      "minutes": {"type": "int"}
+    }
+  },
+  "winsMinutesM": "{minutes}m",
+  "@winsMinutesM": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "winsEarliestLabel": "Earliest wake",
+  "winsMostKeptLabel": "Most kept",
+  "promiseRatesTitle": "Promises · last 30 days",
+  "rateCaption": "{kept} of {total}",
+  "@rateCaption": {
+    "placeholders": {
+      "kept": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "tonightTitle": "Tonight",
+  "tonightWake": "Wake",
+  "tonightBed": "Bedtime",
+  "tonightPromises": "{count} promises",
+  "@tonightPromises": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "restAction": "Rest tomorrow",
+  "restConfirmTitle": "Rest tomorrow?",
+  "restConfirmBody": "No alarm tomorrow. The streak waits for you.",
+  "restUsed": "Rest day used this week",
+  "restActive": "Rest day",
+  "weekDotKept": "Kept",
+  "weekDotFull": "Every promise kept",
+  "weekDotRest": "Rest day",
+  "weekDotMissed": "Quiet day",
+  "weekDotUpcoming": "Not yet",
+  "weekDotNone": "No plan",
+  "settingsTitle": "Settings",
+  "settingsWakelock": "Keep screen on during timer",
+  "settingsLead": "Bedtime reminder lead",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "settingsBackup": "Backup & restore",
+  "backupTitle": "Backup & restore",
+  "backupBody": "Everything lives only on this phone. Export a backup file or restore from one.",
+  "backupExport": "Export backup",
+  "backupExportDone": "Backup ready to share",
+  "backupImport": "Restore from file",
+  "backupPreviewTitle": "Restore this backup?",
+  "backupPreviewCounts": "{mornings} mornings · {promises} promises · {plans} plans",
+  "@backupPreviewCounts": {
+    "placeholders": {
+      "mornings": {"type": "int"},
+      "promises": {"type": "int"},
+      "plans": {"type": "int"}
+    }
+  },
+  "backupReplaceNote": "Restoring replaces everything on this phone.",
+  "backupRestoreDone": "Restored",
+  "backupInvalidFile": "That file is not a valid backup"
 }

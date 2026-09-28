@@ -102,23 +102,24 @@ Goal: prove the alarm fires before building any UI on top of it.
 ## M4 — Dashboard, Rest Day, Backup
 
 - **Dashboard (FR-8.x)**
-  - [ ] Hero: today's result + encouraging copy
-  - [ ] `StreakSun` (grows/glows with streak), current + best
-  - [ ] 66-day journey arc, 3 phases, current highlighted
-  - [ ] Next milestone progress ("2 days to your 7-day sun")
-  - [ ] `WeekStrip` last 7 days (kept/full/rest/upcoming; no red)
-  - [ ] Wins: total minutes, earliest wake, most-kept promise
-  - [ ] Promise list with 30-day kept rates
-  - [ ] `MilestoneBadge` locked/next/earned (gold-400)
-  - [ ] Celebrations: milestone + full morning (sun burst ≤1.5s, confetti glow ≤2s)
-  - [ ] Welcoming empty state ("Day 1 starts tonight")
-  - [ ] Tonight card: wake time, bedtime, plan access
+  - [x] Hero: today's result + encouraging copy
+  - [x] `StreakSun` (grows/glows with streak), current + best
+  - [x] 66-day journey arc, 3 phases, current highlighted
+  - [x] Next milestone progress ("2 days to your 7-day sun")
+  - [x] `WeekStrip` last 7 days (kept/full/rest/upcoming; no red)
+  - [x] Wins: total minutes, earliest wake, most-kept promise
+  - [x] Promise list with 30-day kept rates (upcoming/rest mornings excluded from the denominator)
+  - [x] `MilestoneBadge` locked/next/earned (gold-400)
+  - [x] Celebrations: milestone + full morning (sun burst ≤1.5s, confetti glow ≤2s, once/day, reduce-motion fallback)
+  - [x] Welcoming empty state ("Day 1 starts tonight")
+  - [x] Tonight card: wake time, bedtime, plan access
 - **Rest Day & Fresh Start (P1, FR-9.x)**
-  - [ ] Mark upcoming morning as rest day (cancels alarm; 1 per rolling 7 days)
-  - [ ] Fresh-start framing after a break (tomorrow / Monday / 1st)
+  - [x] Mark upcoming morning as rest day (cancels alarm + reminder; 1 per rolling 7 days; arms the day after so the chain never breaks; `syncAfterOpen` never re-arms a rest morning; DayPhase shows the dashboard, never ringing)
+  - [x] Fresh-start framing after a break (tomorrow / Monday / 1st)
 - **Backup (P1, FR-10.x)**
-  - [ ] Export all tables to versioned JSON (`exportVersion`), share via system sheet
-  - [ ] Import: validate, preview counts, replace strategy, re-schedule alarms
+  - [x] Export all tables to versioned JSON (`exportVersion`), share via system sheet
+  - [x] Import: validate, preview counts, replace strategy, re-schedule alarms
+- Settings screen (wakelock toggle, bedtime-lead chips, backup entry) + `/settings`, `/settings/backup` routes
 
 ---
 

@@ -560,18 +560,6 @@ abstract class AppLocalizations {
   /// **'The focus screen arrives in the next build.'**
   String get focusPlaceholderBody;
 
-  /// No description provided for @dashboardPlaceholderTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Your progress'**
-  String get dashboardPlaceholderTitle;
-
-  /// No description provided for @dashboardPlaceholderBody.
-  ///
-  /// In en, this message translates to:
-  /// **'The dashboard arrives in the next build.'**
-  String get dashboardPlaceholderBody;
-
   /// No description provided for @alarmSpikeTitle.
   ///
   /// In en, this message translates to:
@@ -751,6 +739,366 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Kept. That counts.'**
   String get promiseKept;
+
+  /// No description provided for @dashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get dashboardTitle;
+
+  /// No description provided for @dashEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Day 1 starts tonight.'**
+  String get dashEmptyTitle;
+
+  /// No description provided for @dashEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign your plan this evening — the first sunrise is tomorrow.'**
+  String get dashEmptyBody;
+
+  /// No description provided for @dashHeroKept.
+  ///
+  /// In en, this message translates to:
+  /// **'Promise kept.'**
+  String get dashHeroKept;
+
+  /// No description provided for @dashCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{kept} of {total}'**
+  String dashCount(int kept, int total);
+
+  /// No description provided for @dashHeroRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest today. The streak waits for you.'**
+  String get dashHeroRest;
+
+  /// No description provided for @dashHeroMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'New morning, fresh start.'**
+  String get dashHeroMissed;
+
+  /// No description provided for @dashFreshTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'A fresh start tomorrow.'**
+  String get dashFreshTomorrow;
+
+  /// No description provided for @dashFreshMonday.
+  ///
+  /// In en, this message translates to:
+  /// **'A fresh start on Monday.'**
+  String get dashFreshMonday;
+
+  /// No description provided for @dashFreshFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'A fresh start on the 1st.'**
+  String get dashFreshFirst;
+
+  /// No description provided for @dashForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow the sun rises at {time}.'**
+  String dashForward(String time);
+
+  /// No description provided for @streakCurrentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current streak'**
+  String get streakCurrentLabel;
+
+  /// No description provided for @streakBestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Best streak'**
+  String get streakBestLabel;
+
+  /// No description provided for @streakDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days'**
+  String streakDays(int days);
+
+  /// No description provided for @streakDayOne.
+  ///
+  /// In en, this message translates to:
+  /// **'1 day'**
+  String get streakDayOne;
+
+  /// No description provided for @milestoneNextDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days to your {milestone}-day sun'**
+  String milestoneNextDays(int days, int milestone);
+
+  /// No description provided for @milestoneNextDay.
+  ///
+  /// In en, this message translates to:
+  /// **'1 day to your {milestone}-day sun'**
+  String milestoneNextDay(int milestone);
+
+  /// No description provided for @journeyDayLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} of {total}'**
+  String journeyDayLabel(int day, int total);
+
+  /// No description provided for @journeyPhase1.
+  ///
+  /// In en, this message translates to:
+  /// **'Break the old pattern'**
+  String get journeyPhase1;
+
+  /// No description provided for @journeyPhase2.
+  ///
+  /// In en, this message translates to:
+  /// **'Build the new one'**
+  String get journeyPhase2;
+
+  /// No description provided for @journeyPhase3.
+  ///
+  /// In en, this message translates to:
+  /// **'Make it yours'**
+  String get journeyPhase3;
+
+  /// No description provided for @weekTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get weekTitle;
+
+  /// No description provided for @winsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wins'**
+  String get winsTitle;
+
+  /// No description provided for @winsMinutesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time on what matters'**
+  String get winsMinutesLabel;
+
+  /// No description provided for @winsMinutesHm.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h {minutes}m'**
+  String winsMinutesHm(int hours, int minutes);
+
+  /// No description provided for @winsMinutesM.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m'**
+  String winsMinutesM(int minutes);
+
+  /// No description provided for @winsEarliestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Earliest wake'**
+  String get winsEarliestLabel;
+
+  /// No description provided for @winsMostKeptLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Most kept'**
+  String get winsMostKeptLabel;
+
+  /// No description provided for @promiseRatesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Promises · last 30 days'**
+  String get promiseRatesTitle;
+
+  /// No description provided for @rateCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'{kept} of {total}'**
+  String rateCaption(int kept, int total);
+
+  /// No description provided for @tonightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tonight'**
+  String get tonightTitle;
+
+  /// No description provided for @tonightWake.
+  ///
+  /// In en, this message translates to:
+  /// **'Wake'**
+  String get tonightWake;
+
+  /// No description provided for @tonightBed.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime'**
+  String get tonightBed;
+
+  /// No description provided for @tonightPromises.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} promises'**
+  String tonightPromises(int count);
+
+  /// No description provided for @restAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest tomorrow'**
+  String get restAction;
+
+  /// No description provided for @restConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest tomorrow?'**
+  String get restConfirmTitle;
+
+  /// No description provided for @restConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No alarm tomorrow. The streak waits for you.'**
+  String get restConfirmBody;
+
+  /// No description provided for @restUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest day used this week'**
+  String get restUsed;
+
+  /// No description provided for @restActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest day'**
+  String get restActive;
+
+  /// No description provided for @weekDotKept.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept'**
+  String get weekDotKept;
+
+  /// No description provided for @weekDotFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Every promise kept'**
+  String get weekDotFull;
+
+  /// No description provided for @weekDotRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest day'**
+  String get weekDotRest;
+
+  /// No description provided for @weekDotMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet day'**
+  String get weekDotMissed;
+
+  /// No description provided for @weekDotUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get weekDotUpcoming;
+
+  /// No description provided for @weekDotNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No plan'**
+  String get weekDotNone;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsWakelock.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep screen on during timer'**
+  String get settingsWakelock;
+
+  /// No description provided for @settingsLead.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime reminder lead'**
+  String get settingsLead;
+
+  /// No description provided for @minutesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String minutesShort(int minutes);
+
+  /// No description provided for @settingsBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & restore'**
+  String get settingsBackup;
+
+  /// No description provided for @backupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & restore'**
+  String get backupTitle;
+
+  /// No description provided for @backupBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything lives only on this phone. Export a backup file or restore from one.'**
+  String get backupBody;
+
+  /// No description provided for @backupExport.
+  ///
+  /// In en, this message translates to:
+  /// **'Export backup'**
+  String get backupExport;
+
+  /// No description provided for @backupExportDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup ready to share'**
+  String get backupExportDone;
+
+  /// No description provided for @backupImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from file'**
+  String get backupImport;
+
+  /// No description provided for @backupPreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore this backup?'**
+  String get backupPreviewTitle;
+
+  /// No description provided for @backupPreviewCounts.
+  ///
+  /// In en, this message translates to:
+  /// **'{mornings} mornings · {promises} promises · {plans} plans'**
+  String backupPreviewCounts(int mornings, int promises, int plans);
+
+  /// No description provided for @backupReplaceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Restoring replaces everything on this phone.'**
+  String get backupReplaceNote;
+
+  /// No description provided for @backupRestoreDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Restored'**
+  String get backupRestoreDone;
+
+  /// No description provided for @backupInvalidFile.
+  ///
+  /// In en, this message translates to:
+  /// **'That file is not a valid backup'**
+  String get backupInvalidFile;
 }
 
 class _AppLocalizationsDelegate

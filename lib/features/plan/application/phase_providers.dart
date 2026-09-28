@@ -73,6 +73,7 @@ final dayPhaseProvider = Provider<DayPhase>((ref) {
             alarmFiredAt: morning.alarmFiredAt,
             wakeConfirmedAt: morning.wakeConfirmedAt,
             allPromisesKept: morning.allPromisesKept,
+            isRest: morning.result == 'rest',
           ),
   );
 });

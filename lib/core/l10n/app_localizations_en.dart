@@ -264,13 +264,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'The focus screen arrives in the next build.';
 
   @override
-  String get dashboardPlaceholderTitle => 'Your progress';
-
-  @override
-  String get dashboardPlaceholderBody =>
-      'The dashboard arrives in the next build.';
-
-  @override
   String get alarmSpikeTitle => 'Alarm spike (debug)';
 
   @override
@@ -365,4 +358,211 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get promiseKept => 'Kept. That counts.';
+
+  @override
+  String get dashboardTitle => 'Your progress';
+
+  @override
+  String get dashEmptyTitle => 'Day 1 starts tonight.';
+
+  @override
+  String get dashEmptyBody =>
+      'Sign your plan this evening — the first sunrise is tomorrow.';
+
+  @override
+  String get dashHeroKept => 'Promise kept.';
+
+  @override
+  String dashCount(int kept, int total) {
+    return '$kept of $total';
+  }
+
+  @override
+  String get dashHeroRest => 'Rest today. The streak waits for you.';
+
+  @override
+  String get dashHeroMissed => 'New morning, fresh start.';
+
+  @override
+  String get dashFreshTomorrow => 'A fresh start tomorrow.';
+
+  @override
+  String get dashFreshMonday => 'A fresh start on Monday.';
+
+  @override
+  String get dashFreshFirst => 'A fresh start on the 1st.';
+
+  @override
+  String dashForward(String time) {
+    return 'Tomorrow the sun rises at $time.';
+  }
+
+  @override
+  String get streakCurrentLabel => 'Current streak';
+
+  @override
+  String get streakBestLabel => 'Best streak';
+
+  @override
+  String streakDays(int days) {
+    return '$days days';
+  }
+
+  @override
+  String get streakDayOne => '1 day';
+
+  @override
+  String milestoneNextDays(int days, int milestone) {
+    return '$days days to your $milestone-day sun';
+  }
+
+  @override
+  String milestoneNextDay(int milestone) {
+    return '1 day to your $milestone-day sun';
+  }
+
+  @override
+  String journeyDayLabel(int day, int total) {
+    return 'Day $day of $total';
+  }
+
+  @override
+  String get journeyPhase1 => 'Break the old pattern';
+
+  @override
+  String get journeyPhase2 => 'Build the new one';
+
+  @override
+  String get journeyPhase3 => 'Make it yours';
+
+  @override
+  String get weekTitle => 'Last 7 days';
+
+  @override
+  String get winsTitle => 'Wins';
+
+  @override
+  String get winsMinutesLabel => 'Time on what matters';
+
+  @override
+  String winsMinutesHm(int hours, int minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String winsMinutesM(int minutes) {
+    return '${minutes}m';
+  }
+
+  @override
+  String get winsEarliestLabel => 'Earliest wake';
+
+  @override
+  String get winsMostKeptLabel => 'Most kept';
+
+  @override
+  String get promiseRatesTitle => 'Promises · last 30 days';
+
+  @override
+  String rateCaption(int kept, int total) {
+    return '$kept of $total';
+  }
+
+  @override
+  String get tonightTitle => 'Tonight';
+
+  @override
+  String get tonightWake => 'Wake';
+
+  @override
+  String get tonightBed => 'Bedtime';
+
+  @override
+  String tonightPromises(int count) {
+    return '$count promises';
+  }
+
+  @override
+  String get restAction => 'Rest tomorrow';
+
+  @override
+  String get restConfirmTitle => 'Rest tomorrow?';
+
+  @override
+  String get restConfirmBody => 'No alarm tomorrow. The streak waits for you.';
+
+  @override
+  String get restUsed => 'Rest day used this week';
+
+  @override
+  String get restActive => 'Rest day';
+
+  @override
+  String get weekDotKept => 'Kept';
+
+  @override
+  String get weekDotFull => 'Every promise kept';
+
+  @override
+  String get weekDotRest => 'Rest day';
+
+  @override
+  String get weekDotMissed => 'Quiet day';
+
+  @override
+  String get weekDotUpcoming => 'Not yet';
+
+  @override
+  String get weekDotNone => 'No plan';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsWakelock => 'Keep screen on during timer';
+
+  @override
+  String get settingsLead => 'Bedtime reminder lead';
+
+  @override
+  String minutesShort(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get settingsBackup => 'Backup & restore';
+
+  @override
+  String get backupTitle => 'Backup & restore';
+
+  @override
+  String get backupBody =>
+      'Everything lives only on this phone. Export a backup file or restore from one.';
+
+  @override
+  String get backupExport => 'Export backup';
+
+  @override
+  String get backupExportDone => 'Backup ready to share';
+
+  @override
+  String get backupImport => 'Restore from file';
+
+  @override
+  String get backupPreviewTitle => 'Restore this backup?';
+
+  @override
+  String backupPreviewCounts(int mornings, int promises, int plans) {
+    return '$mornings mornings · $promises promises · $plans plans';
+  }
+
+  @override
+  String get backupReplaceNote =>
+      'Restoring replaces everything on this phone.';
+
+  @override
+  String get backupRestoreDone => 'Restored';
+
+  @override
+  String get backupInvalidFile => 'That file is not a valid backup';
 }

@@ -77,8 +77,6 @@
   "wakePlaceholderBody": "Layar bangun hadir di build berikutnya.",
   "focusPlaceholderTitle": "Satu janji, satu per satu.",
   "focusPlaceholderBody": "Layar fokus hadir di build berikutnya.",
-  "dashboardPlaceholderTitle": "Kemajuanmu",
-  "dashboardPlaceholderBody": "Dasbor hadir di build berikutnya.",
   "alarmSpikeTitle": "Uji alarm (debug)",
   "notifBedtimeTitle": "3AM Club",
   "notifBedtimeBody": "Malam ini, kamu menepati janji.",
@@ -113,5 +111,132 @@
   "timerEndEarlyTitle": "Akhiri sekarang?",
   "timerEndEarlyBody": "Tidak apa-apa. Besok ada kesempatan lagi.",
   "timerLine": "Cukup ini saja.",
-  "promiseKept": "Ditepati. Itu berarti."
+  "promiseKept": "Ditepati. Itu berarti.",
+  "dashboardTitle": "Kemajuanmu",
+  "dashEmptyTitle": "Hari 1 dimulai malam ini.",
+  "dashEmptyBody": "Tanda tangani rencanamu malam ini — matahari pertama terbit besok.",
+  "dashHeroKept": "Janji ditepati.",
+  "dashCount": "{kept} dari {total}",
+  "@dashCount": {
+    "placeholders": {
+      "kept": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dashHeroRest": "Istirahat hari ini. Runtunan menunggumu.",
+  "dashHeroMissed": "Pagi baru, awal baru.",
+  "dashFreshTomorrow": "Awal baru besok.",
+  "dashFreshMonday": "Awal baru hari Senin.",
+  "dashFreshFirst": "Awal baru tanggal 1.",
+  "dashForward": "Besok matahari terbit pukul {time}.",
+  "@dashForward": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "streakCurrentLabel": "Runtunan sekarang",
+  "streakBestLabel": "Runtunan terbaik",
+  "streakDays": "{days} hari",
+  "@streakDays": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "streakDayOne": "1 hari",
+  "milestoneNextDays": "{days} hari lagi menuju matahari {milestone} harimu",
+  "@milestoneNextDays": {
+    "placeholders": {
+      "days": {"type": "int"},
+      "milestone": {"type": "int"}
+    }
+  },
+  "milestoneNextDay": "1 hari lagi menuju matahari {milestone} harimu",
+  "@milestoneNextDay": {
+    "placeholders": {
+      "milestone": {"type": "int"}
+    }
+  },
+  "journeyDayLabel": "Hari {day} dari {total}",
+  "@journeyDayLabel": {
+    "placeholders": {
+      "day": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "journeyPhase1": "Patahkan pola lama",
+  "journeyPhase2": "Bangun yang baru",
+  "journeyPhase3": "Jadikan milikmu",
+  "weekTitle": "7 hari terakhir",
+  "winsTitle": "Kemenangan",
+  "winsMinutesLabel": "Waktu untuk yang penting",
+  "winsMinutesHm": "{hours}j {minutes}m",
+  "@winsMinutesHm": {
+    "placeholders": {
+      "hours": {"type": "int"},
+      "minutes": {"type": "int"}
+    }
+  },
+  "winsMinutesM": "{minutes}m",
+  "@winsMinutesM": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "winsEarliestLabel": "Bangun paling pagi",
+  "winsMostKeptLabel": "Paling sering ditepati",
+  "promiseRatesTitle": "Janji · 30 hari terakhir",
+  "rateCaption": "{kept} dari {total}",
+  "@rateCaption": {
+    "placeholders": {
+      "kept": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "tonightTitle": "Malam ini",
+  "tonightWake": "Bangun",
+  "tonightBed": "Tidur",
+  "tonightPromises": "{count} janji",
+  "@tonightPromises": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "restAction": "Istirahat besok",
+  "restConfirmTitle": "Istirahat besok?",
+  "restConfirmBody": "Tanpa alarm besok. Runtunan menunggumu.",
+  "restUsed": "Hari istirahat sudah dipakai minggu ini",
+  "restActive": "Hari istirahat",
+  "weekDotKept": "Ditepati",
+  "weekDotFull": "Semua janji ditepati",
+  "weekDotRest": "Hari istirahat",
+  "weekDotMissed": "Hari tenang",
+  "weekDotUpcoming": "Belum tiba",
+  "weekDotNone": "Tidak ada rencana",
+  "settingsTitle": "Pengaturan",
+  "settingsWakelock": "Layar tetap menyala saat timer",
+  "settingsLead": "Jeda pengingat waktu tidur",
+  "minutesShort": "{minutes} mnt",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "settingsBackup": "Cadangkan & pulihkan",
+  "backupTitle": "Cadangkan & pulihkan",
+  "backupBody": "Semua data hanya ada di ponsel ini. Ekspor file cadangan atau pulihkan darinya.",
+  "backupExport": "Ekspor cadangan",
+  "backupExportDone": "Cadangan siap dibagikan",
+  "backupImport": "Pulihkan dari file",
+  "backupPreviewTitle": "Pulihkan cadangan ini?",
+  "backupPreviewCounts": "{mornings} pagi · {promises} janji · {plans} rencana",
+  "@backupPreviewCounts": {
+    "placeholders": {
+      "mornings": {"type": "int"},
+      "promises": {"type": "int"},
+      "plans": {"type": "int"}
+    }
+  },
+  "backupReplaceNote": "Memulihkan akan mengganti semua data di ponsel ini.",
+  "backupRestoreDone": "Dipulihkan",
+  "backupInvalidFile": "File itu bukan cadangan yang valid"
 }
