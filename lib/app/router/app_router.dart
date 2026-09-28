@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/time/day_phase.dart';
 import '../../debug/alarm_spike_screen.dart';
 import '../../features/dashboard/presentation/dashboard_screen.dart';
+import '../../features/focus/data/timer_repository.dart';
 import '../../features/focus/presentation/focus_screen.dart';
 import '../../features/focus/presentation/promise_timer_screen.dart';
 import '../../features/night/presentation/night_screen.dart';
@@ -22,11 +23,12 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 /// GoRouter provider (ARCHITECTURE.md §8).
 ///
-/// Redirects are driven by onboarding state and [DayPhase]:
+/// Redirects are driven by onboarding state, the active timer session and
+/// [DayPhase]:
 ///  1. onboarding first (M1);
-///  2. `noPlan` → planning flow;
-///  3. `ringing` → /wake (over the lock screen via the native FSI);
-///  4. `focus` → /focus (locked timer redirect arrives with M3);
+///  2. active promise session → locked `/focus/promise/:id` (M3);
+///  3. `noPlan` → planning flow;
+///  4. `ringing` → /wake (over the lock screen via the native FSI);
 ///  5. `windDown` → /night, `day`/`done` → /dashboard;
 ///  6. the user may always reach /dashboard and /settings.
 final routerProvider = Provider<GoRouter>((ref) {
@@ -55,6 +57,15 @@ final routerProvider = Provider<GoRouter>((ref) {
             : null;
       }
       if (!onboardingDone) return Routes.onboarding;
+
+      // Active promise session → locked timer (ARCHITECTURE.md §8 rule 1).
+      // Any navigation away resolves back here until Complete or the
+      // safety exit ends the session.
+      final session = ref.read(activeTimerSessionProvider).value;
+      if (session != null) {
+        final timerRoute = '${Routes.focus}/promise/${session.promiseId}';
+        return location == timerRoute ? null : timerRoute;
+      }
 
       return _redirectForPhase(ref.read(dayPhaseProvider), location);
     },
@@ -149,6 +160,8 @@ class _PhaseListenable extends ChangeNotifier {
     _subs = [
       ref.listen<DayPhase>(dayPhaseProvider, (_, _) => notifyListeners()),
       ref.listen<bool>(onboardingDoneProvider, (_, _) => notifyListeners()),
+      ref.listen<AsyncValue<TimerSession?>>(activeTimerSessionProvider,
+          (_, _) => notifyListeners()),
     ];
   }
 

@@ -83,19 +83,19 @@ Goal: prove the alarm fires before building any UI on top of it.
 ## M3 — Promise Timer (locked, persistent) & Morning Result
 
 - **Promise Timer (FR-7.x)**
-  - [ ] Timer page: category, title, description, big countdown, `TimerWave` fill
-  - [ ] Button states: Start → Complete (disabled, "N min left") → Complete (enabled, gold)
-  - [ ] Persistence: remaining = `plannedSec − (now − startedAt)`; survives kill/restart/backgrounding/phone call
-  - [ ] Reopening with active session → forced back to timer page (router lock + `PopScope`)
-  - [ ] Completion notification + gentle chime with screen off
-  - [ ] Safety exit: long-press + confirm → "Not finished today", back to Focus (always a11y reachable)
-  - [ ] Wall-clock-change edge case: never negative remaining (tested)
-  - [ ] Optional wakelock while timer visible (setting)
-  - [ ] Celebration on Complete (check draws in 300ms, gold pulse, haptic)
+  - [x] Timer page: category, title, description, big countdown, `TimerWave` fill
+  - [x] Button states: Start → Complete (disabled, "N min left") → Complete (enabled, gold)
+  - [x] Persistence: remaining = `plannedSec − (now − startedAt)`; survives kill/restart/backgrounding/phone call
+  - [x] Reopening with active session → forced back to timer page (router lock + `PopScope`)
+  - [x] Completion notification + gentle chime with screen off
+  - [x] Safety exit: long-press + confirm → "Not finished today", back to Focus (always a11y reachable)
+  - [x] Wall-clock-change edge case: never negative remaining (tested)
+  - [x] Optional wakelock while timer visible (default on; the settings toggle lands with the M4 settings screen)
+  - [x] Celebration on Complete (check draws in 300ms, gold pulse, haptic)
 - **Morning Result & Streak domain (FR-8 prerequisites)**
-  - [ ] `CloseMorning` use case at 06:00 + stale-morning catch-up on app open
-  - [ ] Result rules: `full` / `kept` / `missed` / `rest` (P1)
-  - [ ] `ComputeStreak` use case: consecutive kept/full, rest neutral, best streak, milestones (3/7/14/21/30/44/66), 66-day journey phases
+  - [x] `CloseMorning` use case at 06:00 + stale-morning catch-up on app open (M2)
+  - [x] Result rules: `full` / `kept` / `missed` / `rest` (P1) (M2)
+  - [x] `ComputeStreak` use case: consecutive kept/full, rest neutral, best streak, milestones (3/7/14/21/30/44/66), 66-day journey phases
 
 ---
 

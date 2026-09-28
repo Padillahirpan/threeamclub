@@ -101,5 +101,17 @@
   "statusNotFinished": "Tidak selesai hari ini",
   "focusAllKept": "Semua janji ditepati. Lihat matahari itu.",
   "seeYourProgress": "Lihat kemajuanmu",
-  "focusTimerComing": "Timer hitung mundur terkunci hadir di build berikutnya."
+  "timerStart": "Mulai",
+  "timerComplete": "Selesai",
+  "timerMinutesLeft": "{minutes} menit lagi",
+  "@timerMinutesLeft": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "timerEndEarly": "Akhiri lebih awal (tahan)",
+  "timerEndEarlyTitle": "Akhiri sekarang?",
+  "timerEndEarlyBody": "Tidak apa-apa. Besok ada kesempatan lagi.",
+  "timerLine": "Cukup ini saja.",
+  "promiseKept": "Ditepati. Itu berarti."
 }

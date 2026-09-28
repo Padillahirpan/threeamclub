@@ -704,11 +704,53 @@ abstract class AppLocalizations {
   /// **'See your progress'**
   String get seeYourProgress;
 
-  /// No description provided for @focusTimerComing.
+  /// No description provided for @timerStart.
   ///
   /// In en, this message translates to:
-  /// **'The locked countdown timer arrives in the next build.'**
-  String get focusTimerComing;
+  /// **'Start'**
+  String get timerStart;
+
+  /// No description provided for @timerComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete'**
+  String get timerComplete;
+
+  /// No description provided for @timerMinutesLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min left'**
+  String timerMinutesLeft(int minutes);
+
+  /// No description provided for @timerEndEarly.
+  ///
+  /// In en, this message translates to:
+  /// **'End early (hold)'**
+  String get timerEndEarly;
+
+  /// No description provided for @timerEndEarlyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'End this early?'**
+  String get timerEndEarlyTitle;
+
+  /// No description provided for @timerEndEarlyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s okay. Tomorrow is another chance.'**
+  String get timerEndEarlyBody;
+
+  /// No description provided for @timerLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Just this. Nothing else.'**
+  String get timerLine;
+
+  /// No description provided for @promiseKept.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept. That counts.'**
+  String get promiseKept;
 }
 
 class _AppLocalizationsDelegate

@@ -341,6 +341,28 @@ class AppLocalizationsId extends AppLocalizations {
   String get seeYourProgress => 'Lihat kemajuanmu';
 
   @override
-  String get focusTimerComing =>
-      'Timer hitung mundur terkunci hadir di build berikutnya.';
+  String get timerStart => 'Mulai';
+
+  @override
+  String get timerComplete => 'Selesai';
+
+  @override
+  String timerMinutesLeft(int minutes) {
+    return '$minutes menit lagi';
+  }
+
+  @override
+  String get timerEndEarly => 'Akhiri lebih awal (tahan)';
+
+  @override
+  String get timerEndEarlyTitle => 'Akhiri sekarang?';
+
+  @override
+  String get timerEndEarlyBody => 'Tidak apa-apa. Besok ada kesempatan lagi.';
+
+  @override
+  String get timerLine => 'Cukup ini saja.';
+
+  @override
+  String get promiseKept => 'Ditepati. Itu berarti.';
 }

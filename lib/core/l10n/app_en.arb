@@ -149,5 +149,17 @@
   "statusNotFinished": "Not finished today",
   "focusAllKept": "Every promise kept. Look at that sun.",
   "seeYourProgress": "See your progress",
-  "focusTimerComing": "The locked countdown timer arrives in the next build."
+  "timerStart": "Start",
+  "timerComplete": "Complete",
+  "timerMinutesLeft": "{minutes} min left",
+  "@timerMinutesLeft": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "timerEndEarly": "End early (hold)",
+  "timerEndEarlyTitle": "End this early?",
+  "timerEndEarlyBody": "It's okay. Tomorrow is another chance.",
+  "timerLine": "Just this. Nothing else.",
+  "promiseKept": "Kept. That counts."
 }

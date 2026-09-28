@@ -12,7 +12,9 @@ class NotificationService {
   static final NotificationService instance = NotificationService();
 
   static const String _bedtimeChannelId = 'bedtime_reminder';
+  static const String _timerCompleteChannelId = 'timer_complete';
   static const int bedtimeReminderNotificationId = 4710;
+  static const int timerCompleteNotificationId = 4711;
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -31,15 +33,24 @@ class NotificationService {
       tz.setLocalLocation(tz.UTC);
     }
 
-    const channel = AndroidNotificationChannel(
+    const bedtimeChannel = AndroidNotificationChannel(
       _bedtimeChannelId,
       'Bedtime reminder',
       description: 'Reminder that starts the wind-down before bed',
       importance: Importance.defaultImportance,
     );
+    // Gentle chime at promise-timer completion, also with the screen off
+    // (FR-7.5).
+    const timerChannel = AndroidNotificationChannel(
+      _timerCompleteChannelId,
+      'Promise complete',
+      description: 'Signals the end of a promise timer',
+      importance: Importance.defaultImportance,
+    );
     final android = _plugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
-    await android?.createNotificationChannel(channel);
+    await android?.createNotificationChannel(bedtimeChannel);
+    await android?.createNotificationChannel(timerChannel);
 
     await _plugin.initialize(
       settings: const InitializationSettings(
@@ -84,4 +95,33 @@ class NotificationService {
 
   Future<void> cancelBedtimeReminder() =>
       _plugin.cancel(id: bedtimeReminderNotificationId);
+
+  /// Schedules the promise-timer completion notification (FR-7.5). The
+  /// channel's default sound is the gentle chime.
+  Future<void> scheduleTimerComplete({
+    required DateTime at,
+    required String title,
+    required String body,
+    required String payload,
+  }) async {
+    await _plugin.zonedSchedule(
+      id: timerCompleteNotificationId,
+      title: title,
+      body: body,
+      scheduledDate: tz.TZDateTime.from(at, tz.local),
+      notificationDetails: const NotificationDetails(
+        android: AndroidNotificationDetails(
+          _timerCompleteChannelId,
+          'Promise complete',
+          category: AndroidNotificationCategory.progress,
+          styleInformation: DefaultStyleInformation(false, false),
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
+      payload: payload,
+    );
+  }
+
+  Future<void> cancelTimerComplete() =>
+      _plugin.cancel(id: timerCompleteNotificationId);
 }

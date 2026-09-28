@@ -341,6 +341,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seeYourProgress => 'See your progress';
 
   @override
-  String get focusTimerComing =>
-      'The locked countdown timer arrives in the next build.';
+  String get timerStart => 'Start';
+
+  @override
+  String get timerComplete => 'Complete';
+
+  @override
+  String timerMinutesLeft(int minutes) {
+    return '$minutes min left';
+  }
+
+  @override
+  String get timerEndEarly => 'End early (hold)';
+
+  @override
+  String get timerEndEarlyTitle => 'End this early?';
+
+  @override
+  String get timerEndEarlyBody => 'It\'s okay. Tomorrow is another chance.';
+
+  @override
+  String get timerLine => 'Just this. Nothing else.';
+
+  @override
+  String get promiseKept => 'Kept. That counts.';
 }
