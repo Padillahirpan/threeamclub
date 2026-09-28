@@ -9,9 +9,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <!-- Bedtime reminder notifications scheduled with alarm-clock exactness -->
+    <uses-permission android:name="android.permission.SET_ALARM_CLOCK"/>
 
     <application
-        android:label="3AM Club"
+        android:label="@string/app_name"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

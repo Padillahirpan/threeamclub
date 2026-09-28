@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+﻿import 'package:flutter/services.dart';
 
 import 'alarm_scheduler.dart';
 
@@ -35,6 +35,13 @@ class MethodChannelAlarmScheduler implements AlarmScheduler {
   @override
   Future<void> stopRinging() async {
     await _channel.invokeMethod<void>('stopRinging');
+  }
+
+  @override
+  Future<bool> get isRinging async {
+    final raw = await _channel.invokeMethod<Object?>('getStoredAlarm');
+    if (raw == null) return false;
+    return _asMap(raw)['state'] == 'fired';
   }
 
   @override

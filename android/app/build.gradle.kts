@@ -11,6 +11,8 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        // Required by flutter_local_notifications (java.time backport).
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -20,7 +22,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "club.threeam.subuhan"
         // M0 decision: minSdk 26 (Android 8.0) — notification channels are
         // required for the alarm's full-screen intent; see M0_RESULTS.md.
@@ -30,6 +31,22 @@ android {
         versionName = flutter.versionName
     }
 
+    // Flavors: dev / prod (ARCHITECTURE.md §15).
+    // Build with: flutter run --flavor dev  /  flutter build apk --flavor prod
+    flavorDimensions += "app"
+    productFlavors {
+        create("dev") {
+            dimension = "app"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "3AM Club Dev")
+        }
+        create("prod") {
+            dimension = "app"
+            resValue("string", "app_name", "3AM Club")
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -37,6 +54,10 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 
 flutter {

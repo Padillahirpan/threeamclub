@@ -41,6 +41,9 @@ class AlarmRingingService : Service() {
     private val handler = Handler(Looper.getMainLooper())
     private var rampStep = 0
     private var rampRunnable: Runnable? = null
+    private var ringCycle = 0
+    private var cycleRunnable: Runnable? = null
+    private var gapRunnable: Runnable? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -64,10 +67,54 @@ class AlarmRingingService : Service() {
         }
 
         holdWake()
-        startAudioRamp()
-        startVibration()
+        ringCycle = 0
+        startRingingCycle()
         AlarmRingingServiceHolder.running = true
         return START_STICKY
+    }
+
+    // Re-ring policy (PRD §12 proposal): ring 10 minutes, then re-fire
+    // every 5 minutes, up to 3 ring cycles total. After the last cycle the
+    // alarm gives up (the morning is still confirmable until 06:00).
+    private fun startRingingCycle() {
+        gapRunnable = null
+        startAudioRamp()
+        startVibration()
+        val endCycle = Runnable { endRingCycle() }
+        cycleRunnable = endCycle
+        handler.postDelayed(endCycle, RING_WINDOW_MS)
+    }
+
+    private fun endRingCycle() {
+        cycleRunnable = null
+        stopSoundAndVibration()
+        ringCycle++
+        if (ringCycle >= MAX_RING_CYCLES) {
+            AlarmStore.setState(this, AlarmStore.STATE_STOPPED)
+            AlarmEvents.emit(this, "gaveup")
+            stopSelf()
+            return
+        }
+        val restart = Runnable { startRingingCycle() }
+        gapRunnable = restart
+        handler.postDelayed(restart, RING_GAP_MS)
+    }
+
+    private fun stopSoundAndVibration() {
+        rampRunnable?.let { handler.removeCallbacks(it) }
+        rampRunnable = null
+        rampStep = 0
+        try {
+            player?.let {
+                if (it.isPlaying) it.stop()
+                it.release()
+            }
+        } catch (_: Exception) {
+            // Already released.
+        }
+        player = null
+        vibrator?.cancel()
+        vibrator = null
     }
 
     private fun createChannel() {
@@ -142,7 +189,9 @@ class AlarmRingingService : Service() {
             isLooping = true
             setVolume(0f, 0f)
             setOnErrorListener { _, _, _ ->
-                stopAlarm(emitEvent = false)
+                // Media error: fall into the re-ring cadence instead of
+                // ringing silently forever.
+                endRingCycle()
                 true
             }
             setOnPreparedListener { it.start() }
@@ -188,20 +237,11 @@ class AlarmRingingService : Service() {
     }
 
     private fun stopAlarm(emitEvent: Boolean) {
-        rampRunnable?.let { handler.removeCallbacks(it) }
-        rampRunnable = null
-        rampStep = 0
-        try {
-            player?.let {
-                if (it.isPlaying) it.stop()
-                it.release()
-            }
-        } catch (_: Exception) {
-            // Already released.
-        }
-        player = null
-        vibrator?.cancel()
-        vibrator = null
+        cycleRunnable?.let { handler.removeCallbacks(it) }
+        cycleRunnable = null
+        gapRunnable?.let { handler.removeCallbacks(it) }
+        gapRunnable = null
+        stopSoundAndVibration()
         if (wakeLock?.isHeld == true) wakeLock?.release()
         wakeLock = null
         AlarmStore.setState(this, AlarmStore.STATE_STOPPED)
@@ -224,6 +264,11 @@ class AlarmRingingService : Service() {
         private const val RAMP_SECONDS = 30
         private const val TOTAL_RAMP_STEPS = (RAMP_SECONDS * 1000 / RAMP_STEP_MS).toInt()
         private const val WAKE_LOCK_TIMEOUT_MS = 10 * 60 * 1000L
+
+        // Re-ring policy (PRD §12 proposal): 10 min ring → 5 min gap, ×3.
+        private const val RING_WINDOW_MS = 10 * 60 * 1000L
+        private const val RING_GAP_MS = 5 * 60 * 1000L
+        private const val MAX_RING_CYCLES = 3
 
         /** Stops the ringing alarm from the Dart side (after the 5s hold). */
         fun stop(context: Context) {

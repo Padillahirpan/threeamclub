@@ -24,58 +24,59 @@ Goal: prove the alarm fires before building any UI on top of it.
 
 ## M1 — App Shell, Plan & Promise Builder, Sign
 
-- [ ] Flutter project setup: flavors (`dev`, `prod`), `very_good_analysis`/`flutter_lints`, CI-friendly
-- [ ] Theme: design tokens as `ThemeExtension`s (dark default, night/dawn/gold palette)
-- [ ] Typography: rounded sans + serif accent; tabular numerals for timers
-- [ ] Localizations scaffold: ARB `id` + `en` from day one, no hardcoded strings
-- [ ] drift schema: `plans`, `pre_sleep_items`, `categories`, `promises`, `mornings`, `promise_logs`, `pre_sleep_logs`, `settings` (UUID ids, `createdAt`/`updatedAt`, minutes-from-midday times)
-- [ ] Seed built-in categories (Spiritual, Mind, Body, Home, Create, Plan) + templates
-- [ ] `clockProvider` (fakeable `DateTime.now()`)
-- [ ] Time helpers: time budget, minute-of-day (pure Dart, unit-tested)
+- [x] Flutter project setup: flavors (`dev`/`prod` via `--flavor`), `flutter_lints` — *note: riverpod **codegen** was dropped for manual providers (analyzer version conflict on this SDK); `riverpod_lint` deferred*
+- [x] Theme: design tokens as `ThemeExtension`s (dark default, night/dawn/gold palette) + `AppPalette` const tokens
+- [x] Typography: tokenized styles incl. serif accent + tabular numerals — *bundled font files pending licensing (DESIGN §13); system defaults used, no network fonts (FR-10.2)*
+- [x] Localizations scaffold: ARB `id` + `en` from day one, no hardcoded strings (debug spike screen exempt)
+- [x] drift schema: `plans`, `pre_sleep_items`, `categories`, `promises`, `mornings`, `promise_logs`, `pre_sleep_logs`, `settings` (UUID ids, `createdAt`/`updatedAt`, minutes-from-midnight times)
+- [x] Seed built-in categories (Spiritual, Mind, Body, Home, Create, Plan) + templates (fixed ids, `promiseTemplates`)
+- [x] `clockProvider` (fakeable `DateTime.now()`)
+- [x] Time helpers: time budget, minute-of-day, next occurrence, bedtime-reminder time (pure Dart, unit-tested)
 - **Sleep Plan (FR-1.x)**
-  - [ ] Bedtime + wake time pickers (wake constrained 03:00–05:00, 5-min steps)
-  - [ ] Sleep duration chip; gentle non-blocking hint if < 7h
-  - [ ] Pre-sleep checklist editor (add/edit/delete/reorder, suggestions)
+  - [x] Bedtime + wake time pickers (custom `TimeWheelPicker`; wake constrained 03:00–05:00, 5-min steps)
+  - [x] Sleep duration chip; gentle non-blocking hint if < 7h (warn-500)
+  - [x] Pre-sleep checklist editor (add/rename/delete/reorder + 4 suggestions)
 - **Promise Builder (FR-2.x)**
-  - [ ] Promise CRUD: category, title, description, duration (presets + custom 1–180)
-  - [ ] Custom categories (name, icon, color; edit/archive own)
-  - [ ] Drag reorder, swipe delete
-  - [ ] `TimeBudgetBar`: wake→06:00, segments by category, over-budget state with "Trim N min" message
-  - [ ] Block signing while over budget; require ≥1 promise; "start small" hint > 4 promises
+  - [x] Promise CRUD sheet: category, title, description, duration (presets 5–60 + custom stepper 1–180) + template chips
+  - [x] Custom categories (name, icon, color; edit/archive own via long-press)
+  - [x] Drag reorder + swipe delete (with confirm)
+  - [x] `TimeBudgetBar`: wake→06:00, segments by category, over-budget warn state with "Trim N min" message
+  - [x] Block signing while over budget / no promises (button disabled + helper); "start small" hint > 4 promises
 - **Sign (FR-3.x)**
-  - [ ] Review screen: wake time, bedtime, sleep duration, checklist recap, ordered promises + finish time
-  - [ ] Optional "Why am I doing this?" (~140 chars)
-  - [ ] `HoldButton` (3s, ring progress, haptics, early-release drain, a11y alternative)
-  - [ ] On sign: activate plan, schedule alarm + bedtime reminder, copy promises into tomorrow's `promise_logs`
-- [ ] Local notifications: bedtime reminder (bedtime − lead, default 30 min) → opens `/night`
-- [ ] Onboarding: permissions with plain-language explanations (exact alarm, notifications, battery exemption)
+  - [x] Review screen: wake time, bedtime, sleep duration, checklist recap, ordered promises + "finishes around" time
+  - [x] Optional "Why am I doing this?" (140 chars, persisted to plan + used as alarm body)
+  - [x] `HoldButton` 3s (ring progress, haptics, early-release drain) + a11y "sign without holding" alternative
+  - [x] On sign: activate plan (deactivate previous), schedule M0 native alarm + bedtime reminder, copy promises into `promise_logs`; re-sign for the same wake date replaces that morning
+- [x] Local notifications: bedtime reminder (bedtime − lead 30 min, alarmClock exactness) → payload opens `/night`
+- [x] Onboarding: permission cards with plain-language explanations + request flow (skip allowed)
+- Tests: 24 passing (time/budget rules, HoldButton 2.9s vs 3s, TimeBudgetBar, drift sign flow incl. seeds & re-sign, app smoke)
 
 ---
 
 ## M2 — DayPhase, Router, Night & Wake & Focus
 
-- [ ] `DayPhase.resolve` pure function + full unit tests with fake clock
-  (`noPlan / day / windDown / ringing / focus / done`)
-- [ ] `dayPhaseProvider` re-evaluation: app resume, alarm events, boundary timers (bedtime lead, wake, 06:00), DB changes
-- [ ] go_router setup + redirect rules (locked timer session → noPlan → ringing → phase default)
-- [ ] Deep links: `/wake`, `/night`, `/focus` from notifications and alarm intent
+- [x] `DayPhase.resolve` pure function + full unit tests with fake clock
+  (`noPlan / day / windDown / ringing / focus / done`) — `lib/core/time/day_phase.dart`
+- [x] `dayPhaseProvider` re-evaluation: 30s tick + app resume + alarm events + DB streams (`phaseTickProvider`, `SubuhanApp` observer)
+- [x] go_router setup + redirect rules (onboarding → noPlan → ringing → phase default; `/focus/promise/:id` stubbed for M3)
+- [x] Deep links: bedtime notification payload → `/night`; FSI/`openWake` → `/wake`; phase redirect validates targets
 - **Night Reminder (FR-4.x)**
-  - [ ] `night-950` background, `WaveBackground` (3 layered waves, 14–22s, 30fps cap, reduce-motion fallback)
-  - [ ] Title, wake time (Time Display), sleep duration, pre-sleep checklist (optional ticks → next morning's logs)
-  - [ ] Small dashboard link (48px hit area, ≥4.5:1 contrast), charging line
-  - [ ] Dim + let device sleep after inactivity; pause animation when dimmed
+  - [x] `night-950` background, `WaveBackground` (3 layered sine waves, 18s loop, reduce-motion static fallback, pauses when dimmed)
+  - [x] Title, wake time (Time Display), sleep duration, pre-sleep checklist (tap to tick → `pre_sleep_logs` of the next morning, optional)
+  - [x] Small dashboard link (48px hit area) + charging line
+  - [x] Dim (≈92% night-950 overlay) + animation pause after 2 min inactivity; any touch undims
 - **Wake (FR-5.x)**
-  - [ ] `SunriseIcon` (~3s rise, gentle pulse, glow; static variant)
-  - [ ] Serif headline + user's "why" or default line + current time
-  - [ ] Hold 5s to stop alarm (`wakeControllerProvider`, haptics per second)
-  - [ ] On confirm: record `wakeConfirmedAt`, → Focus
-  - [ ] Re-ring policy (proposal: ring 10 min, then every 5 min, max 3) *(Open Decision #3)*
-  - [ ] Late wake before 06:00 recorded with delay
+  - [x] `SunriseIcon` (~3s rise from horizon, gentle 1.0→1.04 pulse, dawn-glow + rays; static variant under reduce-motion)
+  - [x] Serif headline + user's "why" or default line + ticking clock
+  - [x] Hold 5s stops the alarm (`stopRinging` → `confirmWake`); a11y tap alternative
+  - [x] Re-ring policy *(Open Decision #3 → implemented proposal: ring 10 min, 5-min gaps, 3 cycles, then give-up event)*
+  - [x] Late wake before 06:00 recorded with delay (time-based `ringing` rule)
 - **Focus (FR-6.x)**
-  - [ ] Greeting, time left to 06:00, "why" line, "1 of N promises kept" progress
-  - [ ] `PromiseCard` list with statuses (Not started / In progress / Kept / Not finished); kept = dimmed + check
-  - [ ] Tap promise → timer page; any order
-  - [ ] 06:00 morning close: unfinished → "Not finished today" (neutral), → Dashboard state
+  - [x] "Why" line (serif), time left until 06:00 (ticking), "N of M promises kept" + progress bar
+  - [x] Promise cards in plan order with statuses (Not started / In progress / Kept / Not finished); kept = dimmed + check, tap opens timer stub
+  - [x] 06:00 morning close: `closeMorning` (pending/inProgress → `notFinished`, result = full/kept/missed) + app-open `syncAfterOpen` catch-up + `rollover` arms the next alarm & reminder
+  - [x] All-kept state: gold celebration card + "See your progress" → dashboard
+- Tests: 48 passing (day_phase 17 cases; morning loop: confirm/fire/ticks/close/rollover/sync cold-start; prior suites)
 
 ---
 

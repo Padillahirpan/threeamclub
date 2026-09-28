@@ -1,4 +1,4 @@
-/// AlarmScheduler contract — ARCHITECTURE.md §10.
+﻿/// AlarmScheduler contract — ARCHITECTURE.md §10.
 ///
 /// M0 spike scope: native scheduling only. Dart never owns the alarm;
 /// the platform implementation schedules via AlarmManager.setAlarmClock()
@@ -89,4 +89,8 @@ abstract interface class AlarmScheduler {
 
   /// Stops the ringing alarm (called after the 5s hold completes).
   Future<void> stopRinging();
+
+  /// Whether the native alarm has fired and not been stopped — survives
+  /// process death; used for cold-start wake routing.
+  Future<bool> get isRinging;
 }

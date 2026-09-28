@@ -1,0 +1,153 @@
+﻿{
+  "@@locale": "en",
+  "appTitle": "3AM Club",
+  "next": "Next",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "confirm": "Confirm",
+  "archive": "Archive",
+  "onbTitle": "Welcome to the 3AM Club",
+  "onbIntro": "A calm way to build the habit of waking early. Everything stays on your phone.",
+  "onbNotifTitle": "Notifications",
+  "onbNotifBody": "So the bedtime reminder and the alarm can reach you.",
+  "onbFsiTitle": "Show over the lock screen",
+  "onbFsiBody": "Lets the wake screen appear the moment the alarm rings, even while the phone is locked.",
+  "onbBatteryTitle": "Reliable alarms",
+  "onbBatteryBody": "Ask your phone not to put the app to sleep, so the alarm always rings. (Recommended)",
+  "onbAllow": "Allow what's needed",
+  "onbSkip": "Set up later",
+  "planTitle": "Sleep plan",
+  "bedtimeLabel": "Bedtime",
+  "wakeTimeLabel": "Wake time",
+  "sleepDurationChip": "{hours}h {minutes}m of sleep",
+  "@sleepDurationChip": {
+    "placeholders": {
+      "hours": {"type": "int"},
+      "minutes": {"type": "int"}
+    }
+  },
+  "sleepDurationChipH": "{hours}h of sleep",
+  "@sleepDurationChipH": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "sleepDurationChipM": "{minutes}m of sleep",
+  "@sleepDurationChipM": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "sleepHint": "Earlier bedtime = easier mornings.",
+  "wakeRangeHint": "Pick a time between 3:00 and 5:00",
+  "checklistTitle": "Pre-sleep checklist",
+  "checklistAddHint": "Add an item…",
+  "checklistRenameTitle": "Rename item",
+  "checklistSuggestion1": "Put phone on charge",
+  "checklistSuggestion2": "Set out prayer clothes",
+  "checklistSuggestion3": "Lay out workout clothes",
+  "checklistSuggestion4": "Brush teeth and wudu",
+  "planNext": "Next: choose your morning promises",
+  "promisesTitle": "Morning promises",
+  "budgetUsedOf": "{used} of {budget} min before 6:00",
+  "@budgetUsedOf": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "budget": {"type": "int"}
+    }
+  },
+  "overBudget": "Trim {minutes} min to fit before 6:00",
+  "@overBudget": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "startSmall": "Starting small helps habits stick. You can add more later.",
+  "addPromise": "Add a promise",
+  "promiseTitleLabel": "Title",
+  "promiseTitleHint": "e.g. Tahajud prayer",
+  "promiseDescriptionLabel": "Description (optional)",
+  "promiseDurationLabel": "Duration",
+  "durationMinutes": "{minutes} min",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "customDuration": "Custom",
+  "categoryLabel": "Category",
+  "newCategory": "New category",
+  "newCategoryName": "Category name",
+  "chooseIcon": "Icon",
+  "chooseColor": "Color",
+  "createCategory": "Create",
+  "saveChanges": "Save changes",
+  "editCategoryTitle": "Edit category",
+  "archiveCategoryTitle": "Archive category?",
+  "archiveCategoryBody": "Archived categories are hidden from the builder.",
+  "categoryArchived": "Category archived",
+  "deletePromiseTitle": "Delete this promise?",
+  "deletePromiseBody": "You can add it back anytime.",
+  "signNeedsPromise": "Add at least one promise to sign.",
+  "reviewPromise": "Review my promise",
+  "signTitle": "Sign your promise",
+  "signWakeLabel": "Wake",
+  "signBedtimeLabel": "Bedtime",
+  "signSleepLabel": "Sleep",
+  "signChecklistLabel": "Pre-sleep checklist",
+  "signWhyTitle": "Why am I doing this?",
+  "signWhyHint": "One or two sentences. They will meet you at 4 a.m.",
+  "signHold": "Hold to sign",
+  "signWithoutHold": "Sign without holding",
+  "finishAround": "Finishes around {time}",
+  "@finishAround": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "promiseSigned": "Promise signed",
+  "nightPlaceholderTitle": "Tonight, you keep your promise.",
+  "nightPlaceholderBody": "The full night screen arrives in the next build.",
+  "wakePlaceholderTitle": "Good morning.",
+  "wakePlaceholderBody": "The wake screen arrives in the next build.",
+  "focusPlaceholderTitle": "One promise at a time.",
+  "focusPlaceholderBody": "The focus screen arrives in the next build.",
+  "dashboardPlaceholderTitle": "Your progress",
+  "dashboardPlaceholderBody": "The dashboard arrives in the next build.",
+  "alarmSpikeTitle": "Alarm spike (debug)",
+  "notifBedtimeTitle": "3AM Club",
+  "notifBedtimeBody": "Tonight, you keep your promise.",
+  "alarmWakeLine": "Good morning. You said you would.",
+  "nightTitle": "Tonight, you keep your promise.",
+  "nightLine": "Rest well. Morning is already on your side.",
+  "chargingLine": "Keep your phone charging and close to you.",
+  "viewProgress": "View progress",
+  "checklistOptionalHint": "Optional — tick what's done",
+  "wakeHeadline": "Good morning. You said you would.",
+  "wakeDefaultLine": "The hardest part is this one minute. Hold on.",
+  "wakeHoldLabel": "Hold to wake up",
+  "wakeTapAlt": "Tap to stop instead (accessibility)",
+  "focusGreeting": "One promise at a time.",
+  "focusTimeLeft": "{minutes} min until 6:00",
+  "@focusTimeLeft": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "focusProgress": "{kept} of {total} promises kept",
+  "@focusProgress": {
+    "placeholders": {
+      "kept": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "statusNotStarted": "Not started",
+  "statusInProgress": "In progress",
+  "statusKept": "Kept",
+  "statusNotFinished": "Not finished today",
+  "focusAllKept": "Every promise kept. Look at that sun.",
+  "seeYourProgress": "See your progress",
+  "focusTimerComing": "The locked countdown timer arrives in the next build."
+}
