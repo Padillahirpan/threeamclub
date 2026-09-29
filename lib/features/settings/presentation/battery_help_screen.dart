@@ -60,7 +60,8 @@ class BatteryHelpScreen extends ConsumerWidget {
           ],
           const SizedBox(height: 32),
           FilledButton(
-            onPressed: () => context.go(Routes.settings),
+            onPressed: () =>
+                context.canPop() ? context.pop() : context.go(Routes.settings),
             child: Text(s.batteryDone),
           ),
         ],

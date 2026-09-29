@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -55,7 +55,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         actions: [
           IconButton(
             tooltip: s.settingsTitle,
-            onPressed: () => context.go(Routes.settings),
+            onPressed: () => context.push(Routes.settings),
             icon: const Icon(Icons.settings_outlined),
           ),
         ],
