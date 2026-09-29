@@ -15,6 +15,7 @@ import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/plan/application/phase_providers.dart';
 import '../../features/plan/presentation/plan_screen.dart';
 import '../../features/promises/presentation/promise_builder_screen.dart';
+import '../../features/settings/presentation/battery_help_screen.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/sign/presentation/sign_screen.dart';
 import '../../features/wake/presentation/wake_screen.dart';
@@ -119,6 +120,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const BackupScreen(),
       ),
       GoRoute(
+        path: Routes.settingsBattery,
+        builder: (context, state) => const BatteryHelpScreen(),
+      ),
+      GoRoute(
         path: Routes.debugAlarmSpike,
         builder: (context, state) => const AlarmSpikeScreen(),
       ),
@@ -141,6 +146,11 @@ String? _redirectForPhase(DayPhase phase, String location) {
   if (location == home || allowed.contains(location)) return null;
   if (phase == DayPhase.focus && location.startsWith('${Routes.focus}/')) {
     return null; // promise timer route
+  }
+  // Settings and its sub-pages (backup, battery help) are always open.
+  if (allowed.contains(Routes.settings) &&
+      location.startsWith('${Routes.settings}/')) {
+    return null;
   }
   return home;
 }

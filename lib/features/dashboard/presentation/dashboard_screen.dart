@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/router/routes.dart';
 import '../../../app/theme/app_theme.dart';
 import '../../../core/l10n/app_localizations.dart';
+import '../../../core/platform/method_channel_alarm_scheduler.dart';
 import '../../../core/time/minute_of_day.dart' as t;
 import '../../../core/widgets/journey_arc.dart';
 import '../../../core/widgets/milestone_badge.dart';
@@ -14,6 +15,7 @@ import '../../../core/widgets/streak_sun.dart';
 import '../../../core/widgets/week_strip.dart' as ws;
 import '../../plan/application/phase_providers.dart';
 import '../../plan/data/morning_repository.dart';
+import '../../settings/application/alarm_health.dart';
 import '../data/dashboard_repository.dart';
 import '../domain/streak.dart';
 import 'widgets/celebrations.dart';
@@ -63,6 +65,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           ListView(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
             children: [
+              const _AlarmHealthCard(),
               if (!data.hasHistory) ...[
                 _WelcomeState(s: s),
               ] else ...[
@@ -116,6 +119,93 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           'celebrated-m${data.streak.current}-$day', true);
       if (mounted) setState(() => _confetti = true);
     }
+  }
+}
+
+/// Alarm health warning (M5, ARCHITECTURE.md §10): shown when a critical
+/// permission was revoked — gentle wording, one tap to re-request.
+class _AlarmHealthCard extends ConsumerStatefulWidget {
+  const _AlarmHealthCard();
+
+  @override
+  ConsumerState<_AlarmHealthCard> createState() => _AlarmHealthCardState();
+}
+
+class _AlarmHealthCardState extends ConsumerState<_AlarmHealthCard> {
+  bool _working = false;
+
+  Future<void> _fix(AppLocalizations s) async {
+    setState(() => _working = true);
+    try {
+      final alarm = MethodChannelAlarmScheduler();
+      await alarm.requestNotificationPermission();
+      final perms = await alarm.checkPermissions();
+      if (!perms.fullScreenIntent) {
+        await alarm.openFullScreenIntentSettings();
+      }
+      if (!perms.batteryOptimizationIgnored) {
+        await alarm.requestIgnoreBatteryOptimizations();
+      }
+      await ref.read(alarmHealthProvider.notifier).refresh();
+    } finally {
+      if (mounted) setState(() => _working = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppLocalizations.of(context)!;
+    final perms = ref.watch(alarmHealthProvider);
+    if (perms == null || perms.allCriticalGranted) {
+      return const SizedBox.shrink();
+    }
+
+    return Card(
+      color: AppPalette.warn500.withValues(alpha: 0.12),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            const Icon(Icons.notifications_off_outlined,
+                color: AppPalette.warn500),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    s.healthWarnTitle,
+                    style: const TextStyle(
+                        color: AppPalette.sky100,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    s.healthWarnBody,
+                    style: const TextStyle(
+                        color: AppPalette.mist200,
+                        fontSize: 13,
+                        height: 1.4),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            _working
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : FilledButton.tonal(
+                    onPressed: () => _fix(s),
+                    child: Text(s.healthFixNow),
+                  ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

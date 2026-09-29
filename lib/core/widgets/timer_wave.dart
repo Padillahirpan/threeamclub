@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../app/theme/app_theme.dart';
+import 'capped_frame_animation.dart';
 
 /// Countdown wave (DESIGN.md §5 "Timer wave", §8 `TimerWave`): the fill
 /// level equals elapsed/total and rises smoothly; the surface ripples
@@ -28,10 +29,16 @@ class _TimerWaveState extends State<TimerWave>
     duration: const Duration(seconds: 16),
   );
 
+  /// Repaints capped at ~30fps (DESIGN.md §5 battery rule).
+  late final Animation<double> _capped =
+      CappedFrameAnimation(parent: _ripple);
+
   @override
   void initState() {
     super.initState();
-    _maybeStart();
+    // No MediaQuery access here — didChangeDependencies runs right after
+    // initState and syncs the animation (reading an inherited widget in
+    // initState is an error).
   }
 
   @override
@@ -67,7 +74,7 @@ class _TimerWaveState extends State<TimerWave>
     return CustomPaint(
       painter: _TimerWavePainter(
         progress: widget.progress.clamp(0.0, 1.0),
-        ripple: reduceMotion ? null : _ripple,
+        ripple: reduceMotion ? null : _capped,
       ),
       child: widget.child,
     );

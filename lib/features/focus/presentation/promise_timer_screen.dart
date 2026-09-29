@@ -116,12 +116,19 @@ class _PromiseTimerScreenState extends ConsumerState<PromiseTimerScreen> {
   Widget build(BuildContext context) {
     final s = AppLocalizations.of(context)!;
     final morning = ref.watch(relevantMorningProvider).value;
-    final session = morning == null
+    final sessionAsync = morning == null
         ? null
-        : ref
-            .watch(sessionProvider(
-                (morningId: morning.id, promiseId: widget.promiseId)))
-            .value;
+        : ref.watch(sessionProvider(
+            (morningId: morning.id, promiseId: widget.promiseId)));
+    final session = sessionAsync?.value;
+
+    // Still loading (or the morning itself is) — wait, don't bounce:
+    // treating a not-yet-emitted stream as "no session" flashed back to
+    // Focus before the log arrived.
+    final loading = morning == null || (sessionAsync!.isLoading && !sessionAsync.hasValue);
+    if (loading) {
+      return const Scaffold(body: Center(child: SizedBox.shrink()));
+    }
 
     if (session == null) {
       // Morning closed or log missing — back to Focus.
@@ -147,9 +154,13 @@ class _PromiseTimerScreenState extends ConsumerState<PromiseTimerScreen> {
       WakelockPlus.disable();
     }
 
-    return PopScope(
-      // Locked mode: back is blocked while running (FR-7.3).
-      canPop: !session.isRunning,
+    // Font scaling honored up to 1.3x (DESIGN §10) — the big countdown
+    // must never overflow the locked layout.
+    return MediaQuery.withClampedTextScaling(
+      maxScaleFactor: 1.3,
+      child: PopScope(
+        // Locked mode: back is blocked while running (FR-7.3).
+        canPop: !session.isRunning,
       child: Scaffold(
         backgroundColor: AppPalette.night900,
         body: TimerWave(
@@ -200,12 +211,16 @@ class _PromiseTimerScreenState extends ConsumerState<PromiseTimerScreen> {
                         ),
                       ],
                       const SizedBox(height: 32),
-                      // Big countdown (DESIGN §3 Timer style).
-                      Text(
-                        _format(remaining),
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.timer
-                            .copyWith(color: AppPalette.sky100),
+                      // Big countdown (DESIGN §3 Timer style). Announced
+                      // as time-remaining for screen readers.
+                      Semantics(
+                        label: s.timerMinutesLeft((remaining / 60).ceil()),
+                        child: Text(
+                          _format(remaining),
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.timer
+                              .copyWith(color: AppPalette.sky100),
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -292,6 +307,7 @@ class _PromiseTimerScreenState extends ConsumerState<PromiseTimerScreen> {
             ),
           ),
         ),
+      ),
       ),
     );
   }

@@ -125,14 +125,19 @@ Goal: prove the alarm fires before building any UI on top of it.
 
 ## M5 — Hardening & Pilot
 
-- [ ] a11y audit: contrast ≥4.5:1, font scaling on wake/timer, hold alternatives, reduce-motion everywhere, safety exit reachable by assistive tech
-- [ ] OEM battery-management guidance page (settings help)
-- [ ] Alarm health check on app open (re-register + warn on revoked permissions)
-- [ ] i18n review with native Bahasa Indonesia readers; final 66-day phase names *(PRD Open Q7)*
-- [ ] Performance pass: no spinners on wake path; animations capped 30fps, paused when dimmed
-- [ ] Integration test: plan → sign → simulated alarm → hold → focus → timer → dashboard
-- [ ] Device-lab test: kill mid-timer, reboot, timezone change
-- [ ] Pilot build (APK / internal testing) with club members, 3 weeks, metrics + survey
+- [x] a11y audit: contrast ≥4.5:1 reviewed (mist-200/sky-100 on night-900/-700 all pass; no red anywhere), font scaling clamped at 1.3× on wake/timer, hold alternatives everywhere, reduce-motion on all custom painters, timer countdown announced as time-remaining via Semantics
+- [x] OEM battery-management guidance page (settings help) with per-brand instructions (Samsung/Xiaomi/OPPO/vivo/Huawei + generic) — **`/settings/battery`**
+- [x] Alarm health check on app open + resume (revoked permissions → dashboard warning card with one-tap re-request; channel errors never crash)
+- [ ] i18n review with native Bahasa Indonesia readers; final 66-day phase names *(PRD Open Q7)* — **needs a native reviewer**
+- [x] Performance pass: no spinners on wake path; wave animations capped at ~30fps (`CappedFrameAnimation`), paused when dimmed, static under reduce-motion
+- [x] Integration test: plan → sign → simulated alarm → hold → focus → timer → dashboard (fake clock, real drift, real router)
+- [ ] Device-lab test: kill mid-timer, reboot, timezone change — **needs physical devices** *(kill/restart + cold-start covered in unit tests; matrix in M0_RESULTS.md)*
+- [x] Pilot build: `flutter build apk --flavor prod --release` (`app-prod-release.apk`); 3-week club run + survey remains with the user
+- **Hardening fixes found by the integration test:**
+  - `watchRelevantMorning` built its query via a `dynamic` helper → `Stream<dynamic>` cast error at runtime (phase machine silently degraded) — now typed `Selectable<QueryRow>`
+  - `TimerWave` read `MediaQuery` in `initState` (illegal; crashed the timer screen's first build) — moved to `didChangeDependencies`
+  - `RelevantMorning.isStale` used `DateTime.now()` instead of the injected clock — now `isStaleAt(now)`
+  - Promise timer treated a still-loading session stream as "no session" and bounced back to Focus — now waits while loading
 
 ---
 

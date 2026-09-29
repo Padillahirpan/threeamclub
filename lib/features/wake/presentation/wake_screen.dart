@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,56 +38,61 @@ class WakeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppPalette.night950,
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          // Wake gradient (DESIGN §2).
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppPalette.night900, Color(0xFF3B2A4F)],
+      // Large fonts are honored up to 1.3x — beyond that the layout
+      // would overflow on small screens (DESIGN §10 font scaling).
+      body: MediaQuery.withClampedTextScaling(
+        maxScaleFactor: 1.3,
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            // Wake gradient (DESIGN §2).
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [AppPalette.night900, Color(0xFF3B2A4F)],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              const Spacer(),
-              const SunriseIcon(size: 140),
-              const SizedBox(height: 24),
-              Text(
-                s.wakeHeadline,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.wakeHeadline
-                    .copyWith(color: AppPalette.sky100),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                why.isNotEmpty ? why : s.wakeDefaultLine,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppPalette.mist200.withValues(alpha: 0.9),
-                  fontSize: 15,
+          child: SafeArea(
+            child: Column(
+              children: [
+                const Spacer(),
+                const SunriseIcon(size: 140),
+                const SizedBox(height: 24),
+                Text(
+                  s.wakeHeadline,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.wakeHeadline
+                      .copyWith(color: AppPalette.sky100),
                 ),
-              ),
-              const SizedBox(height: 16),
-              const _WakeClock(),
-              const Spacer(),
-              HoldButton(
-                duration: const Duration(seconds: 5),
-                label: s.wakeHoldLabel,
-                onCompleted: () => _confirmWake(ref),
-              ),
-              const SizedBox(height: 8),
-              // A11y alternative to the hold gesture (DESIGN §10).
-              TextButton(
-                onPressed: () => _confirmWake(ref),
-                child: Text(
-                  s.wakeTapAlt,
-                  style: const TextStyle(fontSize: 13),
+                const SizedBox(height: 8),
+                Text(
+                  why.isNotEmpty ? why : s.wakeDefaultLine,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppPalette.mist200.withValues(alpha: 0.9),
+                    fontSize: 15,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 16),
+                const _WakeClock(),
+                const Spacer(),
+                HoldButton(
+                  duration: const Duration(seconds: 5),
+                  label: s.wakeHoldLabel,
+                  onCompleted: () => _confirmWake(ref),
+                ),
+                const SizedBox(height: 8),
+                // A11y alternative to the hold gesture (DESIGN §10).
+                TextButton(
+                  onPressed: () => _confirmWake(ref),
+                  child: Text(
+                    s.wakeTapAlt,
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),

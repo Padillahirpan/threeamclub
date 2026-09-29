@@ -65,6 +65,14 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.go(Routes.settingsBackup),
           ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.battery_saver_outlined),
+            title: Text(s.settingsBattery,
+                style: const TextStyle(color: AppPalette.sky100)),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.go(Routes.settingsBattery),
+          ),
         ],
       ),
     );

@@ -566,4 +566,68 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get backupInvalidFile => 'File itu bukan cadangan yang valid';
+
+  @override
+  String get healthWarnTitle => 'Alarm mungkin tidak berbunyi';
+
+  @override
+  String get healthWarnBody =>
+      'Ada izin yang mati. Tanpa itu, layar bangun tidak bisa muncul.';
+
+  @override
+  String get healthFixNow => 'Perbaiki sekarang';
+
+  @override
+  String get settingsBattery => 'Pastikan alarm berbunyi';
+
+  @override
+  String get batteryHelpTitle => 'Pastikan alarm berbunyi';
+
+  @override
+  String get batteryHelpIntro =>
+      'Pabrikan ponsel menghemat baterai dengan membiarkan aplikasi tidur. Tiga pengaturan ini menjaga 3AM Club tetap andal.';
+
+  @override
+  String get batteryStepAutoStart =>
+      'Izinkan mulai otomatis (atau hapus pembatasan) agar aplikasi bisa menyala untuk alarm.';
+
+  @override
+  String get batteryStepUnrestricted =>
+      'Atur penggunaan baterai ke Tanpa batas (bukan Dioptimalkan) di pengaturan baterai aplikasi.';
+
+  @override
+  String get batteryStepPin =>
+      'Kunci aplikasi di Menu terbaru agar sistem tidak mematikannya.';
+
+  @override
+  String batteryForBrand(String brand) {
+    return 'Untuk $brand kamu';
+  }
+
+  @override
+  String get batteryBrandSamsung =>
+      'Samsung: Pengaturan → Baterai → Batasan penggunaan latar belakang → izinkan 3AM Club tanpa batasan, dan matikan Tidurkan aplikasi yang tidak dipakai.';
+
+  @override
+  String get batteryBrandXiaomi =>
+      'Xiaomi/POCO: Aplikasi Keamanan → Kelola aplikasi → 3AM Club → Mulai otomatis aktif, Penghemat baterai: Tanpa batasan, lalu kunci aplikasi di Menu terbaru.';
+
+  @override
+  String get batteryBrandOppo =>
+      'OPPO/Realme/OnePlus: Pengaturan → Baterai → Pengaturan lainnya → izinkan 3AM Club: Mulai otomatis, dan izinkan aktivitas latar belakang di penggunaan baterai aplikasi.';
+
+  @override
+  String get batteryBrandVivo =>
+      'vivo/iQOO: Pengaturan → Baterai → Konsumsi daya latar belakang → izinkan 3AM Club, dan aktifkan Mulai otomatis di pengelola aplikasi.';
+
+  @override
+  String get batteryBrandHuawei =>
+      'Huawei/Honor: Pengaturan → Baterai → Peluncuran aplikasi → 3AM Club → matikan Kelola otomatis, aktifkan ketiga opsi.';
+
+  @override
+  String get batteryBrandGeneric =>
+      'Cari pengaturan baterai aplikasi (biasanya di Baterai atau Aplikasi), pilih Tanpa batas, lalu nyalakan sakelar Mulai otomatis atau Aktivitas latar belakang.';
+
+  @override
+  String get batteryDone => 'Selesai';
 }

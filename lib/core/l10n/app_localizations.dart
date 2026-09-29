@@ -1099,6 +1099,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That file is not a valid backup'**
   String get backupInvalidFile;
+
+  /// No description provided for @healthWarnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The alarm may not ring'**
+  String get healthWarnTitle;
+
+  /// No description provided for @healthWarnBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A needed permission is off. Without it the wake screen can\'t appear.'**
+  String get healthWarnBody;
+
+  /// No description provided for @healthFixNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Fix now'**
+  String get healthFixNow;
+
+  /// No description provided for @settingsBattery.
+  ///
+  /// In en, this message translates to:
+  /// **'Make sure the alarm rings'**
+  String get settingsBattery;
+
+  /// No description provided for @batteryHelpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Make sure the alarm rings'**
+  String get batteryHelpTitle;
+
+  /// No description provided for @batteryHelpIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone makers save battery by putting apps to sleep. Three settings keep 3AM Club reliable.'**
+  String get batteryHelpIntro;
+
+  /// No description provided for @batteryStepAutoStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow auto-start (or remove restrictions) so the app can start for the alarm.'**
+  String get batteryStepAutoStart;
+
+  /// No description provided for @batteryStepUnrestricted.
+  ///
+  /// In en, this message translates to:
+  /// **'Set battery use to Unrestricted (not Optimized) in app battery settings.'**
+  String get batteryStepUnrestricted;
+
+  /// No description provided for @batteryStepPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock the app in Recents so the system keeps it alive.'**
+  String get batteryStepPin;
+
+  /// No description provided for @batteryForBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'For your {brand}'**
+  String batteryForBrand(String brand);
+
+  /// No description provided for @batteryBrandSamsung.
+  ///
+  /// In en, this message translates to:
+  /// **'Samsung: Settings → Battery → Background usage limits → make sure 3AM Club is not sleeping; set its Battery to Unrestricted, and turn off Put unused apps to sleep.'**
+  String get batteryBrandSamsung;
+
+  /// No description provided for @batteryBrandXiaomi.
+  ///
+  /// In en, this message translates to:
+  /// **'Xiaomi/POCO: Security app → Manage apps → 3AM Club → Autostart on, Battery saver: No restrictions, and lock the app in Recents.'**
+  String get batteryBrandXiaomi;
+
+  /// No description provided for @batteryBrandOppo.
+  ///
+  /// In en, this message translates to:
+  /// **'OPPO/Realme/OnePlus: Settings → Battery → More settings → allow 3AM Club: Autostart, and allow background activity in the app\'s battery usage.'**
+  String get batteryBrandOppo;
+
+  /// No description provided for @batteryBrandVivo.
+  ///
+  /// In en, this message translates to:
+  /// **'vivo/iQOO: Settings → Battery → Background power consumption → allow 3AM Club, and enable Autostart in the app manager.'**
+  String get batteryBrandVivo;
+
+  /// No description provided for @batteryBrandHuawei.
+  ///
+  /// In en, this message translates to:
+  /// **'Huawei/Honor: Settings → Battery → App launch → 3AM Club → disable Manage automatically, enable all three options.'**
+  String get batteryBrandHuawei;
+
+  /// No description provided for @batteryBrandGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Look for the app\'s battery settings (often under Battery or Apps) and choose Unrestricted, plus any Auto-start or Background activity switch.'**
+  String get batteryBrandGeneric;
+
+  /// No description provided for @batteryDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get batteryDone;
 }
 
 class _AppLocalizationsDelegate

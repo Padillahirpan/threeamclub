@@ -43,7 +43,11 @@ class RelevantMorning {
         t.morningCloseMinute % 60,
       );
 
-  bool get isStale => result == 'pending' && DateTime.now().isAfter(closesAt);
+  /// Whether 06:00 has passed for this pending morning — evaluated at
+  /// [now] so tests drive it with the fake clock (never `DateTime.now()`
+  /// directly, ARCHITECTURE.md §9).
+  bool isStaleAt(DateTime now) =>
+      result == 'pending' && now.isAfter(closesAt);
 }
 
 /// One row of the focus board: a promise with its log status for a morning.
@@ -131,7 +135,11 @@ class MorningRepository {
   Future<RelevantMorning?> relevantMorning() async =>
       _mapFirst(await _relevantMorningQuery().get());
 
-  dynamic _relevantMorningQuery() {
+  /// Typed, not `dynamic`: a dynamic receiver makes `.map(_mapFirst)`
+  /// infer `Stream<dynamic>`, whose implicit cast to
+  /// `Stream<RelevantMorning?>` throws at runtime (caught by the M5
+  /// integration test).
+  Selectable<QueryRow> _relevantMorningQuery() {
     final now = _clock.now();
     final todayKey = t.dateKey(now);
     final tomorrowKey = t.dateKey(now.add(const Duration(days: 1)));
@@ -532,7 +540,7 @@ class MorningRepository {
   /// Closes a stale pending morning if its 06:00 has passed. Returns true
   /// when a close happened (caller may want to re-read state).
   Future<bool> closeIfStale(RelevantMorning? morning) async {
-    if (morning == null || !morning.isStale) return false;
+    if (morning == null || !morning.isStaleAt(_clock.now())) return false;
     await closeMorning(morning.id);
     final plan = await activePlan();
     if (plan != null) {

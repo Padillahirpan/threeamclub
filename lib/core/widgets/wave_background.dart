@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../app/theme/app_theme.dart';
+import 'capped_frame_animation.dart';
 
 /// Three layered sine waves drifting slowly (DESIGN.md §5 "Night waves",
 /// §8 `WaveBackground`): 14–22s cycles at different speeds, amplitude
@@ -24,6 +25,10 @@ class _WaveBackgroundState extends State<WaveBackground>
     vsync: this,
     duration: const Duration(seconds: 18),
   );
+
+  /// Repaints capped at ~30fps (DESIGN.md §5 battery rule).
+  late final Animation<double> _capped =
+      CappedFrameAnimation(parent: _controller);
 
   @override
   void initState() {
@@ -64,7 +69,7 @@ class _WaveBackgroundState extends State<WaveBackground>
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
     return CustomPaint(
       painter: _WavePainter(
-        animation: reduceMotion ? null : _controller,
+        animation: reduceMotion ? null : _capped,
         night950: AppPalette.night950,
         night900: AppPalette.night900,
       ),

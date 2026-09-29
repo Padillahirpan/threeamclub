@@ -238,5 +238,27 @@
   },
   "backupReplaceNote": "Memulihkan akan mengganti semua data di ponsel ini.",
   "backupRestoreDone": "Dipulihkan",
-  "backupInvalidFile": "File itu bukan cadangan yang valid"
+  "backupInvalidFile": "File itu bukan cadangan yang valid",
+  "healthWarnTitle": "Alarm mungkin tidak berbunyi",
+  "healthWarnBody": "Ada izin yang mati. Tanpa itu, layar bangun tidak bisa muncul.",
+  "healthFixNow": "Perbaiki sekarang",
+  "settingsBattery": "Pastikan alarm berbunyi",
+  "batteryHelpTitle": "Pastikan alarm berbunyi",
+  "batteryHelpIntro": "Pabrikan ponsel menghemat baterai dengan membiarkan aplikasi tidur. Tiga pengaturan ini menjaga 3AM Club tetap andal.",
+  "batteryStepAutoStart": "Izinkan mulai otomatis (atau hapus pembatasan) agar aplikasi bisa menyala untuk alarm.",
+  "batteryStepUnrestricted": "Atur penggunaan baterai ke Tanpa batas (bukan Dioptimalkan) di pengaturan baterai aplikasi.",
+  "batteryStepPin": "Kunci aplikasi di Menu terbaru agar sistem tidak mematikannya.",
+  "batteryForBrand": "Untuk {brand} kamu",
+  "@batteryForBrand": {
+    "placeholders": {
+      "brand": {"type": "String"}
+    }
+  },
+  "batteryBrandSamsung": "Samsung: Pengaturan → Baterai → Batasan penggunaan latar belakang → izinkan 3AM Club tanpa batasan, dan matikan Tidurkan aplikasi yang tidak dipakai.",
+  "batteryBrandXiaomi": "Xiaomi/POCO: Aplikasi Keamanan → Kelola aplikasi → 3AM Club → Mulai otomatis aktif, Penghemat baterai: Tanpa batasan, lalu kunci aplikasi di Menu terbaru.",
+  "batteryBrandOppo": "OPPO/Realme/OnePlus: Pengaturan → Baterai → Pengaturan lainnya → izinkan 3AM Club: Mulai otomatis, dan izinkan aktivitas latar belakang di penggunaan baterai aplikasi.",
+  "batteryBrandVivo": "vivo/iQOO: Pengaturan → Baterai → Konsumsi daya latar belakang → izinkan 3AM Club, dan aktifkan Mulai otomatis di pengelola aplikasi.",
+  "batteryBrandHuawei": "Huawei/Honor: Pengaturan → Baterai → Peluncuran aplikasi → 3AM Club → matikan Kelola otomatis, aktifkan ketiga opsi.",
+  "batteryBrandGeneric": "Cari pengaturan baterai aplikasi (biasanya di Baterai atau Aplikasi), pilih Tanpa batas, lalu nyalakan sakelar Mulai otomatis atau Aktivitas latar belakang.",
+  "batteryDone": "Selesai"
 }

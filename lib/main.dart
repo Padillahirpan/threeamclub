@@ -9,6 +9,7 @@ import 'core/platform/notification_service.dart';
 import 'features/onboarding/data/onboarding_repository.dart';
 import 'features/plan/application/phase_providers.dart';
 import 'features/plan/data/morning_repository.dart';
+import 'features/settings/application/alarm_health.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +46,10 @@ Future<void> main() async {
   if (shouldOpenOnWake) {
     container.read(alarmRingingProvider.notifier).set(true);
   }
+
+  // Health check (M5): verify critical alarm permissions on open —
+  // revoked permissions surface a warning card on the dashboard.
+  await container.read(alarmHealthProvider.notifier).refresh();
 
   // Keep the alarm event processor alive for the whole session.
   container.read(alarmEventProcessorProvider);

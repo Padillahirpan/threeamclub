@@ -565,4 +565,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backupInvalidFile => 'That file is not a valid backup';
+
+  @override
+  String get healthWarnTitle => 'The alarm may not ring';
+
+  @override
+  String get healthWarnBody =>
+      'A needed permission is off. Without it the wake screen can\'t appear.';
+
+  @override
+  String get healthFixNow => 'Fix now';
+
+  @override
+  String get settingsBattery => 'Make sure the alarm rings';
+
+  @override
+  String get batteryHelpTitle => 'Make sure the alarm rings';
+
+  @override
+  String get batteryHelpIntro =>
+      'Phone makers save battery by putting apps to sleep. Three settings keep 3AM Club reliable.';
+
+  @override
+  String get batteryStepAutoStart =>
+      'Allow auto-start (or remove restrictions) so the app can start for the alarm.';
+
+  @override
+  String get batteryStepUnrestricted =>
+      'Set battery use to Unrestricted (not Optimized) in app battery settings.';
+
+  @override
+  String get batteryStepPin =>
+      'Lock the app in Recents so the system keeps it alive.';
+
+  @override
+  String batteryForBrand(String brand) {
+    return 'For your $brand';
+  }
+
+  @override
+  String get batteryBrandSamsung =>
+      'Samsung: Settings → Battery → Background usage limits → make sure 3AM Club is not sleeping; set its Battery to Unrestricted, and turn off Put unused apps to sleep.';
+
+  @override
+  String get batteryBrandXiaomi =>
+      'Xiaomi/POCO: Security app → Manage apps → 3AM Club → Autostart on, Battery saver: No restrictions, and lock the app in Recents.';
+
+  @override
+  String get batteryBrandOppo =>
+      'OPPO/Realme/OnePlus: Settings → Battery → More settings → allow 3AM Club: Autostart, and allow background activity in the app\'s battery usage.';
+
+  @override
+  String get batteryBrandVivo =>
+      'vivo/iQOO: Settings → Battery → Background power consumption → allow 3AM Club, and enable Autostart in the app manager.';
+
+  @override
+  String get batteryBrandHuawei =>
+      'Huawei/Honor: Settings → Battery → App launch → 3AM Club → disable Manage automatically, enable all three options.';
+
+  @override
+  String get batteryBrandGeneric =>
+      'Look for the app\'s battery settings (often under Battery or Apps) and choose Unrestricted, plus any Auto-start or Background activity switch.';
+
+  @override
+  String get batteryDone => 'Done';
 }

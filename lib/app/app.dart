@@ -2,9 +2,11 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/clock/clock.dart';
 import '../core/l10n/app_localizations.dart';
 import '../features/plan/application/phase_providers.dart';
 import '../features/plan/data/morning_repository.dart';
+import '../features/settings/application/alarm_health.dart';
 import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 
@@ -33,9 +35,12 @@ class _SubuhanAppState extends ConsumerState<SubuhanApp>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // dayPhaseProvider re-evaluates on app resume (ARCHITECTURE.md §7).
+    // dayPhaseProvider re-evaluates on app resume (ARCHITECTURE.md §7)…
     if (state == AppLifecycleState.resumed) {
       ref.read(phaseTickProvider.notifier).bump();
+      // …and the alarm health check re-runs (permissions may have been
+      // revoked in system settings while the app was backgrounded).
+      ref.read(alarmHealthProvider.notifier).refresh();
     }
   }
 
@@ -45,7 +50,8 @@ class _SubuhanAppState extends ConsumerState<SubuhanApp>
     // open, then arm the next one (FR-6.5 + alarm chain).
     ref.listen(relevantMorningProvider, (_, next) {
       final morning = next.value;
-      if (morning != null && morning.isStale) {
+      if (morning != null &&
+          morning.isStaleAt(ref.read(clockProvider).now())) {
         ref.read(morningRepositoryProvider).closeIfStale(morning);
       }
     });
