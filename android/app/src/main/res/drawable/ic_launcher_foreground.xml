@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adaptive-icon foreground: sun over horizon, inside the 66dp safe
+     zone of the 108dp canvas (stars at the upper corners). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- stars -->
+    <path
+        android:fillColor="#FDF6EC"
+        android:pathData="M34.5,34a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0z"/>
+    <path
+        android:fillColor="#FDF6EC"
+        android:pathData="M70,38a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0z"/>
+    <!-- sun -->
+    <path
+        android:fillColor="#F4A261"
+        android:pathData="M42,48a12,12 0 1,0 24,0a12,12 0 1,0 -24,0z"/>
+    <!-- horizon -->
+    <path
+        android:fillColor="#FDF6EC"
+        android:pathData="M40,62h28a2,2 0 0,1 0,4h-28a2,2 0 0,1 0,-4z"/>
+</vector>

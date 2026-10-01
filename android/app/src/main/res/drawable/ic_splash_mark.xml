@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sun-over-horizon mark (DESIGN.md brand): dawn disc + sky horizon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="132dp"
+    android:height="132dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <!-- stars -->
+    <path
+        android:fillColor="#FDF6EC"
+        android:pathData="M41,52a3,3 0 1,0 6,0a3,3 0 1,0 -6,0z"/>
+    <path
+        android:fillColor="#FDF6EC"
+        android:pathData="M153,60a3,3 0 1,0 6,0a3,3 0 1,0 -6,0z"/>
+    <!-- sun -->
+    <path
+        android:fillColor="#F4A261"
+        android:pathData="M66,92a34,34 0 1,0 68,0a34,34 0 1,0 -68,0z"/>
+    <!-- horizon -->
+    <path
+        android:fillColor="#FDF6EC"
+        android:pathData="M56,126h88a4,4 0 0,1 0,8h-88a4,4 0 0,1 0,-8z"/>
+</vector>
